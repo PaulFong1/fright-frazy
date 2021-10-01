@@ -16,7 +16,7 @@ public class TestTeleOp extends BaseRobot {
     }
     @Override
     public void loop() {
-        if (gamepad1.left_bumper) {    // Using the power adjustment factors to balance the motors
+/*        if (gamepad1.left_bumper) {    // Using the power adjustment factors to balance the motors
             if (gamepad1.x) leftBack.setPower(ConstantVariables.K_LB_ADJUST);
             else leftBack.setPower(0);
             if (gamepad1.y) rightBack.setPower(ConstantVariables.K_RB_ADJUST);
@@ -35,6 +35,8 @@ public class TestTeleOp extends BaseRobot {
             if (gamepad1.b) rightFront.setPower(1);
             else rightFront.setPower(0);
         }
+
+ */
 
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
         if (gamepad1.left_bumper)       topSpin.setPower(1);

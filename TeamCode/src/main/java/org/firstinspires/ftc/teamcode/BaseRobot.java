@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import static com.qualcomm.robotcore.hardware.DistanceSensor.distanceOutOfRange;
 //created by Paul Fong for 16887
 public class BaseRobot extends OpMode {
-    public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin;   // The four wheels
+    public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel
 //    public DcMotor leftBack, rightBack, leftFront, rightFront, lift1, spin1, spin2; //lift2; 1 is right, 2 is left
 //   public Servo left_servo, right_servo;
@@ -28,6 +28,7 @@ public class BaseRobot extends OpMode {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack  = hardwareMap.get(DcMotor.class, "rightBack");
         topSpin   = hardwareMap.get(DcMotor.class, "topSpin");
+        linearSlide   = hardwareMap.get(DcMotor.class, "linearSide");
 //        lift1      = hardwareMap.get(DcMotor.class, "lift1");
 //        spin1      = hardwareMap.get(DcMotor.class, "spin1");
 //        spin2      = hardwareMap.get(DcMotor.class, "spin2");
@@ -39,6 +40,7 @@ public class BaseRobot extends OpMode {
         telemetry.addData("INI Front ZeroP behavior:", "Left=%s, Right=%s", leftFront.getZeroPowerBehavior(), rightFront.getZeroPowerBehavior());
         telemetry.addData("INI Back ZeroP behavior: ", "Left=%s, Right=%s", leftBack.getZeroPowerBehavior(), rightBack.getZeroPowerBehavior());
         telemetry.addData("INI topSpin: ", "ZeroP=%s, POS=%d", topSpin.getZeroPowerBehavior(), topSpin.getCurrentPosition());
+        telemetry.addData("INI linearSlide: ", "ZeroP=%s, POS=%d", linearSlide.getZeroPowerBehavior(), linearSlide.getCurrentPosition());
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
 //       telemetry.addData("INI LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());

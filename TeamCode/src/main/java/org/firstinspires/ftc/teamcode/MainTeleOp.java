@@ -28,6 +28,11 @@ public class MainTeleOp extends BaseRobot {
         if (gamepad1.left_bumper)       topSpin.setPower(1);
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
         else                            topSpin.setPower(0);
+        //turn the motor for the linear slide
+        if (gamepad1.left_trigger>0)       linearSlide.setPower(1);
+        else if (gamepad1.right_trigger>0) linearSlide.setPower(-1);
+        else                            linearSlide.setPower(0);
+
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

@@ -40,7 +40,9 @@ public class BaseRobot extends OpMode {
         telemetry.addData("INI Front ZeroP behavior:", "Left=%s, Right=%s", leftFront.getZeroPowerBehavior(), rightFront.getZeroPowerBehavior());
         telemetry.addData("INI Back ZeroP behavior: ", "Left=%s, Right=%s", leftBack.getZeroPowerBehavior(), rightBack.getZeroPowerBehavior());
         telemetry.addData("INI topSpin: ", "ZeroP=%s, POS=%d", topSpin.getZeroPowerBehavior(), topSpin.getCurrentPosition());
+
         telemetry.addData("INI linearSlide: ", "ZeroP=%s, POS=%d", linearSlide.getZeroPowerBehavior(), linearSlide.getCurrentPosition());
+
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
 //       telemetry.addData("INI LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
@@ -52,6 +54,8 @@ public class BaseRobot extends OpMode {
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //        lift1.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
 //        lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -97,6 +101,7 @@ public class BaseRobot extends OpMode {
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
+            telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
           //  telemetry.addData("Servo pos: ", "Left=%.2f, Right=%.2f", left_servo.getPosition(), right_servo.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
@@ -164,7 +169,7 @@ public class BaseRobot extends OpMode {
     }
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
-    public boolean auto_mecanum(double power, double inches) {
+/*    public boolean auto_mecanum(double power, double inches) {
         double TARGET_ENC = ConstantVariables.K_PPIN_DRIVE * inches;
         double leftFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double leftBackPower = Range.clip(0 + power, -1.0, 1.0);
@@ -187,6 +192,8 @@ public class BaseRobot extends OpMode {
             return false;
         }
     }
+
+ */
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
         rightPwr *= -1;
 
@@ -244,8 +251,7 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
     // alpha is light intensity
 //    public boolean is_black(int alpha, int red, int blue) { return ((alpha > 350) && (blue > red*(3.0/4.0))); }
 //    public boolean is_yellow(int alpha, int red, int green, int blue) { return ((alpha > 350) && (red > 2*blue) && (green > 2*blue)); }
-    public boolean is_black(int alpha, int red, int blue) { return ((blue > red*(3.0/4.0))); }
-    public boolean is_yellow(int alpha, int red, int green, int blue) { return ((red > 2*blue) && (green > 2*blue)); }
+//    public boolean is_black(int alpha, int red, int blue) { return ((blue > red*(3.0/4.0))); }//   public boolean is_yellow(int alpha, int red, int green, int blue) { return ((red > 2*blue) && (green > 2*blue)); }
 
 //    public boolean set_lift1_target_pos(int target_pos) {
 //        if (lift1.getCurrentPosition() == target_pos) return true;
@@ -267,6 +273,8 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // The motor is to do its best to run at targeted velocity.
 //        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -329,5 +337,11 @@ rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        }
         return rightFront.getCurrentPosition();
+    }
+    public int get_linearSlide_motor_enc() {
+//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
+//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        }
+        return linearSlide.getCurrentPosition();
     }
 }

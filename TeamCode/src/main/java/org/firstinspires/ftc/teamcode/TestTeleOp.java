@@ -39,9 +39,17 @@ public class TestTeleOp extends BaseRobot {
  */
 
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
-        if (gamepad1.left_bumper)       topSpin.setPower(1);
+   /*     if (gamepad1.left_bumper)       topSpin.setPower(1);
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
         else                            topSpin.setPower(0);
+
+
+    */
+
+        if (gamepad1.left_bumper)       linearSlide.setPower(0.1);
+        else if (gamepad1.right_bumper) linearSlide.setPower(-0.1);
+        else                            linearSlide.setPower(0);
+
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

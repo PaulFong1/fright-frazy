@@ -5,17 +5,20 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 //@Disabled
 public class Forward1_Right extends BaseRobot {
     private int stage = 0;
+
     @Override
     public void init() {
         super.init();
         DEBUG = true;
     }
+
     @Override
     public void start() {
         super.start();
 //        lift1.setPower(0.0);            // Don't need LIFT for this mode
 //        lift1.setTargetPosition(0);
     }
+
     @Override
     public void loop() {
         // Assumptions: the rack is down
@@ -26,9 +29,9 @@ public class Forward1_Right extends BaseRobot {
                     stage++;
                 }
                 break;
-            case 1:          // SLOWLY Strafe RIGHT up to 12 inches to park
-                if (auto_mecanum(0.5, 33.0)) {
-                    reset_drive_encoders();
+/*            case 1:          // SLOWLY Strafe RIGHT up to 12 inches to park
+ //               if (auto_mecanum(0.5, 33.0)) {
+ //                   reset_drive_encoders();
                     stage++;
                 }
                 break;
@@ -36,5 +39,10 @@ public class Forward1_Right extends BaseRobot {
         }
         if (DEBUG) telemetry.addData("Red Skystone Simple: ", stage);
         super.loop();
+
+ */
+        }
+
+
     }
 }

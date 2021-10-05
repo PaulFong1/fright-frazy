@@ -19,18 +19,17 @@ public class MainTeleOp extends BaseRobot {
         if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
             if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
             else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
-            else if (gamepad1.dpad_left) auto_mecanum(-0.75, 0.5);
-            else if (gamepad1.dpad_right) auto_mecanum(0.75, 0.5);
-//            reset_drive_encoders();
+              reset_drive_encoders();
         }
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
 
         if (gamepad1.left_bumper)       topSpin.setPower(1);
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
         else                            topSpin.setPower(0);
+
         //turn the motor for the linear slide
-        if (gamepad1.left_trigger>0)       linearSlide.setPower(1);
-        else if (gamepad1.right_trigger>0) linearSlide.setPower(-1);
+        if (gamepad1.x)       linearSlide.setPower(0.1);
+        else if (gamepad1.y) linearSlide.setPower(-0.1);
         else                            linearSlide.setPower(0);
 
 

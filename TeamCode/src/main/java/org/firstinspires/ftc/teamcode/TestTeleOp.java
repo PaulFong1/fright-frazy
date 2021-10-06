@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
+
 //
 // Created for 16887.
 @TeleOp(name="Test TeleOp", group="_Other")
@@ -37,6 +39,13 @@ public class TestTeleOp extends BaseRobot {
         }
 
  */
+        if (gamepad1.a){
+            leftBack.setPower(1.0);
+        }
+        else if (gamepad1.b){
+            leftBack.setPower(-1.0);
+        }
+        else leftBack.setPower(0);
 
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
    /*     if (gamepad1.left_bumper)       topSpin.setPower(1);
@@ -45,12 +54,14 @@ public class TestTeleOp extends BaseRobot {
 
 
     */
-
-        if (gamepad1.left_bumper)       linearSlide.setPower(0.1);
-        else if (gamepad1.right_bumper) linearSlide.setPower(-0.1);
+/*
+        if (gamepad1.x)       linearSlide.setPower(1.0);
+        else if (gamepad1.y) linearSlide.setPower(-1.0);
         else                            linearSlide.setPower(0);
 
 
+
+ */
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
 /*
@@ -58,6 +69,7 @@ public class TestTeleOp extends BaseRobot {
         if (gamepad1.a) open_servos(); //find double through trial and error; set in constant variables
         //close servo (DOWN)
         if (gamepad1.b)  close_servos(); //find double through trial and error; set in constant variables
+
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
 */

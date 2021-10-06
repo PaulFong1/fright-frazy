@@ -28,7 +28,7 @@ public class BaseRobot extends OpMode {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack  = hardwareMap.get(DcMotor.class, "rightBack");
         topSpin   = hardwareMap.get(DcMotor.class, "topSpin");
-        linearSlide   = hardwareMap.get(DcMotor.class, "linearSide");
+        linearSlide   = hardwareMap.get(DcMotor.class, "linearSlide");
 //        lift1      = hardwareMap.get(DcMotor.class, "lift1");
 //        spin1      = hardwareMap.get(DcMotor.class, "spin1");
 //        spin2      = hardwareMap.get(DcMotor.class, "spin2");
@@ -101,7 +101,9 @@ public class BaseRobot extends OpMode {
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
+
             telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
+            telemetry.addData("linearSlide  power: ", "linearSlide=%.2f", linearSlide.getPower());
           //  telemetry.addData("Servo pos: ", "Left=%.2f, Right=%.2f", left_servo.getPosition(), right_servo.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
@@ -148,7 +150,7 @@ public class BaseRobot extends OpMode {
      * @param degrees: the number of degrees to turn.
      * @return Whether the target angle has been reached.
      */
-    public boolean auto_turn(double power, double degrees) {
+/*    public boolean auto_turn(double power, double degrees) {
         double TARGET_ENC = Math.abs(ConstantVariables.K_PPDEG_DRIVE * degrees);  // degrees to turns
         double speed = Range.clip(power, -1, 1);
         leftFront.setPower(-speed);
@@ -167,6 +169,8 @@ public class BaseRobot extends OpMode {
             return false;
         }
     }
+
+ */
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
 /*    public boolean auto_mecanum(double power, double inches) {
@@ -194,6 +198,10 @@ public class BaseRobot extends OpMode {
     }
 
  */
+  //  public void linearSlideMove(boolean up, boolean down)
+
+
+
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
         rightPwr *= -1;
 

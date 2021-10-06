@@ -28,8 +28,8 @@ public class MainTeleOp extends BaseRobot {
         else                            topSpin.setPower(0);
 
         //turn the motor for the linear slide
-        if (gamepad1.x)       linearSlide.setPower(0.1);
-        else if (gamepad1.y) linearSlide.setPower(-0.1);
+        if (gamepad1.x)       linearSlide.setPower(1);
+        else if (gamepad1.y) linearSlide.setPower(-1);
         else                            linearSlide.setPower(0);
 
 

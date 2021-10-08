@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-// Testing 1234556
+
 // Created for 16887.
 @TeleOp(name="Main TeleOp", group="TeleOp")
 //@Disabled
@@ -27,9 +27,48 @@ public class MainTeleOp extends BaseRobot {
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
         else                            topSpin.setPower(0);
 
+        int stageZero = 0;
+        int stageOne  = 590;
+        int stageTwo = 1149;
+        if (gamepad1.x){
+            if (get_linearSlide_motor_enc()<=stageOne) {
+
+
+                while (get_linearSlide_motor_enc() <= stageOne) { //go up to 590
+                    linearSlide.setPower(0.5);
+                }
+
+                }
+            else if (get_linearSlide_motor_enc()<=stageTwo) {
+                while (get_linearSlide_motor_enc()<=stageTwo){// go up to 1149
+                    linearSlide.setPower(0.5);
+                }
+            }
+            else linearSlide.setPower(0);
+            }
+        else if (gamepad1.y){
+            if (get_linearSlide_motor_enc()>=stageOne) {
+                while (get_linearSlide_motor_enc()>=stageOne){//go down to 590
+                    linearSlide.setPower(-0.5);
+
+                }
+            }
+            else if (get_linearSlide_motor_enc()>=stageZero) {
+
+
+                while (get_linearSlide_motor_enc() >= stageZero) { //go down to 0
+                    linearSlide.setPower(-0.5);
+                }
+
+            }
+
+            else linearSlide.setPower(0);
+        }
+        else linearSlide.setPower(0);
+
         //turn the motor for the linear slide
-        if (gamepad1.x)       linearSlide.setPower(1);
-        else if (gamepad1.y) linearSlide.setPower(-1);
+        if (gamepad1.a)       linearSlide.setPower(0.5); //extend
+        else if (gamepad1.b) linearSlide.setPower(-0.5); //retract
         else                            linearSlide.setPower(0);
 
 

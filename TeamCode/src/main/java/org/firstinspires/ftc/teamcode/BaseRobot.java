@@ -78,6 +78,8 @@ public class BaseRobot extends OpMode {
 //        front_sensor.enableLed(true);   // turn on the sensor LED
         telemetry.addData("START Front ZeroP behavior:", "Left=%s, Right=%s", leftFront.getZeroPowerBehavior(), rightFront.getZeroPowerBehavior());
         telemetry.addData("START Back ZeroP behavior: ", "Left=%s, Right=%s", leftBack.getZeroPowerBehavior(), rightBack.getZeroPowerBehavior());
+
+        telemetry.addData("START linearSlide ZeroP behavior: ", "linearSlide=%s", linearSlide.getZeroPowerBehavior());
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
@@ -293,6 +295,8 @@ leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 /*    public void reset_lift1_encoder() {
         // The motor is to set the current encoder position to zero.

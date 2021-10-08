@@ -55,6 +55,8 @@ public class BaseRobot extends OpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        topSpin.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //        lift1.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
@@ -80,6 +82,8 @@ public class BaseRobot extends OpMode {
         telemetry.addData("START Back ZeroP behavior: ", "Left=%s, Right=%s", leftBack.getZeroPowerBehavior(), rightBack.getZeroPowerBehavior());
 
         telemetry.addData("START linearSlide ZeroP behavior: ", "linearSlide=%s", linearSlide.getZeroPowerBehavior());
+        telemetry.addData("START topSpin ZeroP behavior: ", "topSpin=%s", topSpin.getZeroPowerBehavior());
+
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
@@ -106,6 +110,9 @@ public class BaseRobot extends OpMode {
 
             telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
             telemetry.addData("linearSlide  power: ", "linearSlide=%.2f", linearSlide.getPower());
+
+            telemetry.addData("topSpin pos:", "linearSlide =%d", get_topSpin_motor_enc());
+            telemetry.addData("topSpin  power: ", "linearSlide=%.2f", topSpin.getPower());
           //  telemetry.addData("Servo pos: ", "Left=%.2f, Right=%.2f", left_servo.getPosition(), right_servo.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
@@ -200,7 +207,7 @@ public class BaseRobot extends OpMode {
     }
 
  */
-  //  public void linearSlideMove(boolean up, boolean down)
+
 
 
 
@@ -258,6 +265,18 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         rightBack.setPower(rightPower);     // right is opposite to left
         if (DEBUG) telemetry.addData("TAND- Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
     }
+
+    public static void linearSlideSetPosition(DcMotor motor, int stageIndex, double power) {
+        motor.setTargetPosition(stageIndex * 500);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        motor.setPower(power);
+        while (motor.isBusy()) { }
+        motor.setPower(0);
+
+        return;
+    }
     // alpha is light intensity
 //    public boolean is_black(int alpha, int red, int blue) { return ((alpha > 350) && (blue > red*(3.0/4.0))); }
 //    public boolean is_yellow(int alpha, int red, int green, int blue) { return ((alpha > 350) && (red > 2*blue) && (green > 2*blue)); }
@@ -285,6 +304,9 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        topSpin.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         // The motor is to do its best to run at targeted velocity.
 //        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -297,6 +319,8 @@ leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        topSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 /*    public void reset_lift1_encoder() {
         // The motor is to set the current encoder position to zero.
@@ -356,4 +380,11 @@ rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        }
         return linearSlide.getCurrentPosition();
     }
+    public int get_topSpin_motor_enc() {
+//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
+//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        }
+        return topSpin.getCurrentPosition();
+    }
+
 }

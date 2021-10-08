@@ -56,6 +56,12 @@ public class TestTeleOp extends BaseRobot {
 
 
     */
+       // stageIndex1 = 540;
+
+        if (gamepad1.x) {
+            linearSlideSetPosition (linearSlide, 1,1.0);
+        }
+
 
         if (gamepad1.a)       linearSlide.setPower(0.5);
         else if (gamepad1.b) linearSlide.setPower(-0.5);

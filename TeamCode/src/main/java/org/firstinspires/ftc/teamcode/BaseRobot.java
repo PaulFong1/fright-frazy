@@ -295,8 +295,7 @@ leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 /*    public void reset_lift1_encoder() {
         // The motor is to set the current encoder position to zero.

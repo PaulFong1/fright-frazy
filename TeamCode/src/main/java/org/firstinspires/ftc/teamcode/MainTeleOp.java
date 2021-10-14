@@ -29,34 +29,35 @@ public class MainTeleOp extends BaseRobot {
 
         int stageZero = 0;
         int stageOne  = 590;
-        int stageTwo = 1149;
+        int stageTwo = 600;
         if (gamepad1.x){
-            if (get_linearSlide_motor_enc()<=stageOne) {
+            if (get_linearSlide_motor_enc()<stageOne) {
 
 
-                while (get_linearSlide_motor_enc() <= stageOne) { //go up to 590
+                while (get_linearSlide_motor_enc() < stageOne) { //go up to 590
                     linearSlide.setPower(0.5);
+
                 }
 
                 }
-            else if (get_linearSlide_motor_enc()<=stageTwo) {
-                while (get_linearSlide_motor_enc()<=stageTwo){// go up to 1149
+            else if (get_linearSlide_motor_enc()<stageTwo) {
+                while (get_linearSlide_motor_enc()<stageTwo){// go up to 1149
                     linearSlide.setPower(0.5);
                 }
             }
             else linearSlide.setPower(0);
             }
         else if (gamepad1.y){
-            if (get_linearSlide_motor_enc()>=stageOne) {
-                while (get_linearSlide_motor_enc()>=stageOne){//go down to 590
+            if (get_linearSlide_motor_enc()>stageOne) {
+                while (get_linearSlide_motor_enc()>stageOne){//go down to 590
                     linearSlide.setPower(-0.5);
 
                 }
             }
-            else if (get_linearSlide_motor_enc()>=stageZero) {
+            else if (get_linearSlide_motor_enc()>stageZero) {
 
 
-                while (get_linearSlide_motor_enc() >= stageZero) { //go down to 0
+                while (get_linearSlide_motor_enc() > stageZero) { //go down to 0
                     linearSlide.setPower(-0.5);
                 }
 

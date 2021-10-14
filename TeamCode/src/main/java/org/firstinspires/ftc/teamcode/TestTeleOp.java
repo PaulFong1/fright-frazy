@@ -7,14 +7,18 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Test TeleOp", group="_Other")
 //@Disabled
 public class TestTeleOp extends BaseRobot {
+    int stage = 0;
     @Override
     public void init() {
         super.init();
+
+
     }
     @Override
     public void start() {
         super.start();
-        DEBUG = true;                  // Start in debug mode
+        DEBUG = true;
+        // Start in debug mode
     }
     @Override
     public void loop() {
@@ -50,27 +54,49 @@ public class TestTeleOp extends BaseRobot {
 
  */
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
-   /*     if (gamepad1.left_bumper)       topSpin.setPower(1);
+        if (gamepad1.left_bumper)       topSpin.setPower(1);
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
         else                            topSpin.setPower(0);
 
 
-    */
-       // stageIndex1 = 540;
 
+       // stageIndex1 = 540;
+/*
         if (gamepad1.x) {
             linearSlideSetPosition (linearSlide, 1,1.0);
         }
 
 
+ */
+/*
         if (gamepad1.a)       linearSlide.setPower(0.5);
         else if (gamepad1.b) linearSlide.setPower(-0.5);
         else                            linearSlide.setPower(0);
 
 
+ */
+        if (gamepad1.x)
+        {
+            if (stage<2 && get_linearSlide_motor_enc() < 510)
+            {
+                stage++;
+                linearSlideSetPosition(linearSlide, stage, 0.5);
+            }
+        }
+
+        else if (gamepad1.y)
+        {
+            if (stage>0 && get_linearSlide_motor_enc() >  490) {
+                stage--;
+                linearSlideSetPosition(linearSlide, stage, 0.5);
+            }
+
+        }
+    else linearSlide.setPower(0);
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
+
 /*
         //open servo (UP)
         if (gamepad1.a) open_servos(); //find double through trial and error; set in constant variables

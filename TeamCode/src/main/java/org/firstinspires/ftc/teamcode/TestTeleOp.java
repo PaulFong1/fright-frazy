@@ -80,7 +80,7 @@ public class TestTeleOp extends BaseRobot {
             if (stage<2 && get_linearSlide_motor_enc() < 510)
             {
                 stage++;
-                linearSlideSetPosition(linearSlide, stage, 0.5);
+                linearSlideSetPosition(linearSlide, stage, 0.3);
             }
         }
 
@@ -88,7 +88,7 @@ public class TestTeleOp extends BaseRobot {
         {
             if (stage>0 && get_linearSlide_motor_enc() >  490) {
                 stage--;
-                linearSlideSetPosition(linearSlide, stage, 0.5);
+                linearSlideSetPosition(linearSlide, stage, 0.3);
             }
 
         }

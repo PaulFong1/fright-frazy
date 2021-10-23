@@ -56,13 +56,8 @@ public class MainTeleOp extends BaseRobot {
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
 
-        // open servo
-    /*    if (gamepad1.a)
-            open_servos(); //find double through trial and error; set in constant variables
-        // close servo
-        if (gamepad1.b)
-            close_servos(); //find double through trial and error; set in constant variables
+
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
-   */
+
     }
 }

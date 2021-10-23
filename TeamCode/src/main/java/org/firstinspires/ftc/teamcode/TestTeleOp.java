@@ -43,16 +43,7 @@ public class TestTeleOp extends BaseRobot {
         }
 
  */
-/*        if (gamepad1.a){
-            leftBack.setPower(1.0);
-        }
-        else if (gamepad1.b){
-            leftBack.setPower(-1.0);
-        }
-        else leftBack.setPower(0);
 
-
- */
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
         if (gamepad1.left_bumper)       topSpin.setPower(1);
         else if (gamepad1.right_bumper) topSpin.setPower(-1);
@@ -60,21 +51,7 @@ public class TestTeleOp extends BaseRobot {
 
 
 
-       // stageIndex1 = 540;
-/*
-        if (gamepad1.x) {
-            linearSlideSetPosition (linearSlide, 1,1.0);
-        }
 
-
- */
-/*
-        if (gamepad1.a)       linearSlide.setPower(0.5);
-        else if (gamepad1.b) linearSlide.setPower(-0.5);
-        else                            linearSlide.setPower(0);
-
-
- */
         if (gamepad1.x)
         {
             if (stage<2 && get_linearSlide_motor_enc() < 510)

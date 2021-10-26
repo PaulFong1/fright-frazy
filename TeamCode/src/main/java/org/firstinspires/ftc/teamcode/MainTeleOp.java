@@ -59,5 +59,14 @@ public class MainTeleOp extends BaseRobot {
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
 
+        if (gamepad1.dpad_down)
+        {
+            rotate.setPower(-0.2);
+        }
+        if (gamepad1.dpad_up)
+        {
+            rotate.setPower(0.2);
+        }
+
     }
 }

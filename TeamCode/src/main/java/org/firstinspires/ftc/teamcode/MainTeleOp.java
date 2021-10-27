@@ -18,8 +18,8 @@ public class MainTeleOp extends BaseRobot {
 
         // Mini movements
         if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
-            if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
-            else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
+  //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
+    //        else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
               reset_drive_encoders();
         }
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise

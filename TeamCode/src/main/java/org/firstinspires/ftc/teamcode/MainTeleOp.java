@@ -53,21 +53,28 @@ public class MainTeleOp extends BaseRobot {
 
         }
         else linearSlide.setPower(0);
+
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
 
 
-        if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
+
 
         if (gamepad1.dpad_down)
         {
-            rotate1.setPower(-0.2);
-            rotate2.setPower(-0.2);
+            rotate1.setPower(-0.5);
+            rotate2.setPower(-0.5);
         }
-        if (gamepad1.dpad_up)
+        else if (gamepad1.dpad_up)
         {
-            rotate1.setPower(0.2);
-            rotate2.setPower(0.2);
+            rotate1.setPower(0.5);
+            rotate2.setPower(0.5);
+        }
+        else
+        {
+            rotate1.setPower(0);
+            rotate2.setPower(0);
+
         }
 
     }

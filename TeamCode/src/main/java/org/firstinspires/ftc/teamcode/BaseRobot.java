@@ -10,10 +10,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import static com.qualcomm.robotcore.hardware.DistanceSensor.distanceOutOfRange;
 //created by Paul Fong for 16887
+//2021-2022 FTC Seasob
 public class BaseRobot extends OpMode {
-    public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide, rotate1, rotate2;   // The four wheels
+    public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide, rotate1, intake;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel
-//    public DcMotor leftBack, rightBack, leftFront, rightFront, lift1, spin1, spin2; //lift2; 1 is right, 2 is left
+
 //   public Servo left_servo, right_servo;
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
@@ -30,10 +31,8 @@ public class BaseRobot extends OpMode {
         topSpin   = hardwareMap.get(DcMotor.class, "topSpin");
         linearSlide   = hardwareMap.get(DcMotor.class, "linearSlide");
         rotate1  = hardwareMap.get(DcMotor.class, "rotate1");
-        rotate2  = hardwareMap.get(DcMotor.class, "rotate2");
-//        lift1      = hardwareMap.get(DcMotor.class, "lift1");
-//        spin1      = hardwareMap.get(DcMotor.class, "spin1");
-//        spin2      = hardwareMap.get(DcMotor.class, "spin2");
+        intake  = hardwareMap.get(DcMotor.class, "intake");
+
 //        front_sensor = hardwareMap.get(ColorSensor.class, "front_sensor");
 //        distance_sensor = hardwareMap.get(DistanceSensor.class, "front_sensor");
 //        front_sensor.enableLed(false);               // turn off the sensor LED to save power
@@ -46,7 +45,7 @@ public class BaseRobot extends OpMode {
         telemetry.addData("INI linearSlide: ", "ZeroP=%s, POS=%d", linearSlide.getZeroPowerBehavior(), linearSlide.getCurrentPosition());
 
         telemetry.addData("INI rotate1: ", "ZeroP=%s, POS=%d", rotate1.getZeroPowerBehavior(), rotate1.getCurrentPosition());
-        telemetry.addData("INI rotate2: ", "ZeroP=%s, POS=%d", rotate2.getZeroPowerBehavior(), rotate2.getCurrentPosition());
+        telemetry.addData("INI rotate2: ", "ZeroP=%s, POS=%d", intake.getZeroPowerBehavior(), intake.getCurrentPosition());
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
 //       telemetry.addData("INI LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
@@ -65,7 +64,7 @@ public class BaseRobot extends OpMode {
 
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 //        lift1.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
@@ -95,7 +94,7 @@ public class BaseRobot extends OpMode {
         telemetry.addData("START topSpin ZeroP behavior: ", "topSpin=%s", topSpin.getZeroPowerBehavior());
 
         telemetry.addData("START rotate ZeroP behavior: ", "rotate1=%s", rotate1.getZeroPowerBehavior());
-        telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", rotate2.getZeroPowerBehavior());
+        telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", intake.getZeroPowerBehavior());
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
@@ -129,8 +128,8 @@ public class BaseRobot extends OpMode {
             telemetry.addData("rotate1 pos:", "rotate1 =%d", get_rotate1_motor_enc());
             telemetry.addData("rotate1  power: ", "rotate1 =%.2f", rotate1.getPower());
 
-            telemetry.addData("rotate2 pos:", "rotate2 =%d", get_rotate2_motor_enc());
-            telemetry.addData("rotate2  power: ", "rotate2 =%.2f", rotate2.getPower());
+            telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
+            telemetry.addData("intake  power: ", "intake =%.2f", intake.getPower());
           //  telemetry.addData("Servo pos: ", "Left=%.2f, Right=%.2f", left_servo.getPosition(), right_servo.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
@@ -227,8 +226,6 @@ public class BaseRobot extends OpMode {
  */
 
 
-
-
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
         rightPwr *= -1;
 
@@ -285,7 +282,7 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
     }
 
     public static void linearSlideSetPosition(DcMotor motor, int stageIndex, double power) {
-        motor.setTargetPosition(stageIndex * 500);
+        motor.setTargetPosition(stageIndex * 500 + 10 );
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -326,7 +323,7 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         topSpin.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         rotate1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rotate2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // The motor is to do its best to run at targeted velocity.
 //        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -343,7 +340,7 @@ rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         topSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rotate1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rotate2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 /*    public void reset_lift1_encoder() {
         // The motor is to set the current encoder position to zero.
@@ -416,11 +413,11 @@ rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        }
         return rotate1.getCurrentPosition();
     }
-    public int get_rotate2_motor_enc() {
+    public int get_intake_motor_enc() {
 //       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
 //            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        }
-        return rotate2.getCurrentPosition();
+        return intake.getCurrentPosition();
     }
 
 }

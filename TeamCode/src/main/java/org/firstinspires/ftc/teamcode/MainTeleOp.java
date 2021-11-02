@@ -63,17 +63,17 @@ public class MainTeleOp extends BaseRobot {
         if (gamepad1.dpad_down)
         {
             rotate1.setPower(-0.5);
-            rotate2.setPower(-0.5);
+
         }
         else if (gamepad1.dpad_up)
         {
             rotate1.setPower(0.5);
-            rotate2.setPower(0.5);
+
         }
         else
         {
             rotate1.setPower(0);
-            rotate2.setPower(0);
+
 
         }
 

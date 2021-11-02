@@ -267,7 +267,7 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         leftBack.setPower(leftBackPower);
         rightFront.setPower(rightFrontPower);
         rightBack.setPower(rightBackPower);
-        if (DEBUG) telemetry.addData("TANM- Lateral: ", lateralpwr);
+        if (DEBUG) telemetry.addData("TANK- Lateral: ", lateralpwr);
     }
     public void tank_drive(double leftPwr, double rightPwr) {
         rightPwr *= -1;                     // rightPwr is in reverse
@@ -278,7 +278,7 @@ rightBackPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0
         leftBack.setPower(leftPower);
         rightFront.setPower(rightPower);    // right is opposite to left
         rightBack.setPower(rightPower);     // right is opposite to left
-        if (DEBUG) telemetry.addData("TAND- Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
+        if (DEBUG) telemetry.addData("TANK- Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
     }
 
     public static void linearSlideSetPosition(DcMotor motor, int stageIndex, double power) {

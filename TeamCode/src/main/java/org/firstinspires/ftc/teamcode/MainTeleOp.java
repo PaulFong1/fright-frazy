@@ -14,7 +14,10 @@ public class MainTeleOp extends BaseRobot {
     public void loop() {
 
         //        tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+       // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+
+
+        tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
 
         // Mini movements
         if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {

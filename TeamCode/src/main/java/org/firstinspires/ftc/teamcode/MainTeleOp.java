@@ -20,22 +20,29 @@ public class MainTeleOp extends BaseRobot {
         tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
 
         // Mini movements
-        if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
+    //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
   //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
             //       else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
               reset_drive_encoders();
-        }
+   //     }
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
 
-        if (gamepad1.left_bumper)       topSpin.setPower(1);
-        else if (gamepad1.right_bumper) topSpin.setPower(-1);
-        else                            topSpin.setPower(0);
+        /* if (gamepad1.left_bumper)       box_Spin.setPosition(0.5);
+
+       else if (gamepad1.right_bumper)
+       {
+        while (gamepad1.right_bumper)
+            axle_spin.setPower(0.3);
+
+        }
+        else
+            topSpin.setPower(0);*/
 
 
 
         //turn the motor for the linear slide
-        if (gamepad1.a)       linearSlide.setPower(0.5); //extend
-        else if (gamepad1.b) linearSlide.setPower(-0.5); //retract
+        if (gamepad1.a)       linearSlide.setPower(0.3); //extend
+        else if (gamepad1.b) linearSlide.setPower(-0.3); //retract
         else                            linearSlide.setPower(0);
 
         if (gamepad1.x)
@@ -59,6 +66,12 @@ public class MainTeleOp extends BaseRobot {
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
+
+        if (gamepad1.left_trigger>0.5)
+            topSpin.setPower(0.5);
+        else
+            topSpin.setPower(0);
+
 
 
 

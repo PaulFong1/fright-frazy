@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import static com.qualcomm.robotcore.hardware.DistanceSensor.distanceOutOfRange;
 import com.qualcomm.robotcore.hardware.CRServo;
 //created by Paul Fong for 16887
-//2021-2022 FTC Seasob
+//2021-2022 FTC Season
 public class BaseRobot extends OpMode {
     public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide, rotate1;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel

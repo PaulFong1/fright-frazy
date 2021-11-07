@@ -24,11 +24,12 @@ public class Forward1_Right extends BaseRobot {
         // Assumptions: the rack is down
         switch (stage) {
             case 0:          // SLOWLY Forward 5 inches
-                if (auto_drive(0.5, 3.0)) {
-                    reset_drive_encoders();
-                    stage++;
+                tank_drive(0.3,0.3);
+               // if (auto_drive(0.5, 3.0)) {
+                //    reset_drive_encoders();
+                //    stage++;
                 }
-                break;
+           //     break;
 /*            case 1:          // SLOWLY Strafe RIGHT up to 12 inches to park
  //               if (auto_mecanum(0.5, 33.0)) {
  //                   reset_drive_encoders();
@@ -45,4 +46,4 @@ public class Forward1_Right extends BaseRobot {
 
 
     }
-}
+

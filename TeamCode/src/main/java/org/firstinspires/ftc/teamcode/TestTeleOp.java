@@ -63,7 +63,7 @@ public class TestTeleOp extends BaseRobot {
 
 
 
-
+/*
         if (gamepad1.x)
         {
             if (stage<2 && get_linearSlide_motor_enc() < 510)
@@ -82,6 +82,8 @@ public class TestTeleOp extends BaseRobot {
 
         }
     else linearSlide.setPower(0);
+
+ */
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

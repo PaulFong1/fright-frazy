@@ -124,19 +124,23 @@ public class BaseRobot extends OpMode {
 
 //            telemetry.addData("Timer ", "%.1f", timer.seconds());
 //            telemetry.addData("LIFT1 motor current pos: ", "%d, Color = %s", get_lift1_motor_enc(), detected_color);
+//            telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
+//            telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
+//            telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
+//            telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
+//            telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
+//            telemetry.addData("linearSlide power: ", "linearSlide=%.2f", linearSlide.getPower());
+//            telemetry.addData("topSpin pos:", "topSpin =%d", get_topSpin_motor_enc());
+//            telemetry.addData("topSpin power: ", "topSpin=%.2f", topSpin.getPower());
+            telemetry.addData("rotate1 pos:", "rotate1 =%d", get_rotate1_motor_enc());
+            telemetry.addData("rotate1 power: ", "rotate1 =%.2f", rotate1.getPower());
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
-
-            telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
-            telemetry.addData("linearSlide power: ", "linearSlide=%.2f", linearSlide.getPower());
-
-            telemetry.addData("topSpin pos:", "topSpin =%d", get_topSpin_motor_enc());
-            telemetry.addData("topSpin power: ", "topSpin=%.2f", topSpin.getPower());
-
-            telemetry.addData("rotate1 pos:", "rotate1 =%d", get_rotate1_motor_enc());
-            telemetry.addData("rotate1 power: ", "rotate1 =%.2f", rotate1.getPower());
+            telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
+            telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
+            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
 
             // telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
             // telemetry.addData("intake  power: ", "intake =%.2f", intake.getPower());
@@ -190,7 +194,7 @@ public class BaseRobot extends OpMode {
      * @param degrees: the number of degrees to turn.
      * @return Whether the target angle has been reached.
      */
-/*    public boolean auto_turn(double power, double degrees) {
+    public boolean auto_turn(double power, double degrees) {
         double TARGET_ENC = Math.abs(ConstantVariables.K_PPDEG_DRIVE * degrees);  // degrees to turns
         double speed = Range.clip(power, -1, 1);
         leftFront.setPower(-speed);
@@ -210,7 +214,7 @@ public class BaseRobot extends OpMode {
         }
     }
 
- */
+
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
 /*    public boolean auto_mecanum(double power, double inches) {
@@ -238,7 +242,6 @@ public class BaseRobot extends OpMode {
     }
 
  */
-
 
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
         rightPwr *= -1;
@@ -289,23 +292,23 @@ public class BaseRobot extends OpMode {
         rightPwr *= -1;                     // rightPwr is in reverse
         double leftPower = Range.clip(leftPwr, -1.0, 1.0);
         double rightPower = Range.clip(rightPwr, -1.0, 1.0);
-
-
-        //     leftPower = Range.clip(leftFrontPower * ConstantVariables.K_LF_ADJUST, -1.0, 1.0);
-
-        //   rightPower = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
+        // Adjustment due to variation in physical motor power
+        //   LF_Power = Range.clip(leftFrontPower * ConstantVariables.K_LF_ADJUST, -1.0, 1.0);
+        //   RF_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
+        //   LB_Power = Range.clip(leftFrontPower * ConstantVariables.K_LB_ADJUST, -1.0, 1.0);
+        //   RB_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
 
         leftFront.setPower(leftPower);
-        leftBack.setPower(leftPower);
+        leftBack.setPower(-leftPower);
         rightFront.setPower(rightPower);    // right is opposite to left
-        rightBack.setPower(rightPower);     // right is opposite to left
+        rightBack.setPower(-rightPower);     // right is opposite to left
         if (DEBUG)
             telemetry.addData("TANK- Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
     }
 
     public static void linearSlideSetPosition(DcMotor motor, int targetPosition) {
-        double power = 1.0;
-        if (motor.getCurrentPosition() > targetPosition) power = -1.0;
+        double power = 0.5;
+        if (motor.getCurrentPosition() > targetPosition) power = -power;  // Reverse direction
 
         motor.setTargetPosition(targetPosition);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -345,11 +348,8 @@ public class BaseRobot extends OpMode {
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        topSpin.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        rotate1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // The motor is to do its best to run at targeted velocity.
 //        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -362,12 +362,20 @@ public class BaseRobot extends OpMode {
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        topSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        rotate1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         // intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    public void reset_linearSlide_encoders() {
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    public void reset_spin_encoders() {
+        topSpin.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        topSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    public void reset_rotate_encoders() {
+        rotate1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rotate1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /*    public void reset_lift1_encoder() {
@@ -404,53 +412,36 @@ public class BaseRobot extends OpMode {
 
     //get leftFront encoder
     public int get_leftFront_motor_enc() {
-//        if (leftFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return leftFront.getCurrentPosition();
     }
 
     //get rightBack encoder
     public int get_rightBack_motor_enc() {
-//        if (rightBack.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return rightBack.getCurrentPosition();
     }
 
     //get rightFront encoder
     public int get_rightFront_motor_enc() {
-//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return rightFront.getCurrentPosition();
     }
 
     public int get_linearSlide_motor_enc() {
-//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return linearSlide.getCurrentPosition();
     }
 
     public int get_topSpin_motor_enc() {
-//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return topSpin.getCurrentPosition();
     }
 
     public int get_rotate1_motor_enc() {
-//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
+//
         return rotate1.getCurrentPosition();
     }
-    /*public int get_intake_motor_enc() {
-//       if (rightFront.getMode() != DcMotor.RunMode.RUN_USING_ENCODER) {
-//            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        }
-        return intake.getCurrentPosition();
-    }*/
+
 
 }

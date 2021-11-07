@@ -36,7 +36,9 @@ public class MainTeleOp extends BaseRobot {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
         //       else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
         reset_drive_encoders();
-        //     }
+        reset_linearSlide_encoders();
+        reset_rotate_encoders();
+        reset_spin_encoders();//     }
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
 
         /* if (gamepad1.left_bumper)       box_Spin.setPosition(0.5);

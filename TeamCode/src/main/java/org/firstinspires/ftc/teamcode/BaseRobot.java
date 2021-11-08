@@ -53,12 +53,11 @@ public class BaseRobot extends OpMode {
         telemetry.addData("INI rotate1: ", "ZeroP=%s, POS=%d", rotate1.getZeroPowerBehavior(), rotate1.getCurrentPosition());
         //telemetry.addData("INI rotate2: ", "ZeroP=%s, POS=%d", intake.getZeroPowerBehavior(), intake.getCurrentPosition());
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
-//       telemetry.addData("INI LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("INI Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
         // telemetry.addData("INI Servo dir: ", "LEFT=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
         //telemetry.addData("INI Servo pos: ", "LEFT=%.2f, RIGHT=%.2f", axle_spin.getPosition(), box_Spin.getPosition());
-
+        // BRAKE: The motor stops and then brakes, actively resisting any external force which attempts to turn the motor.
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -73,10 +72,8 @@ public class BaseRobot extends OpMode {
 
         //intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
 //        lift1.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
 //        lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
         //spin1.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
 //        spin1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         //spin2.setDirection(DcMotorSimple.Direction.REVERSE);        // Because of the way the motor is mounted, this will avoid using negative numbers
@@ -88,7 +85,9 @@ public class BaseRobot extends OpMode {
     public void start() {
         timer.reset();
         reset_drive_encoders();         // reset all  motors: set encoders to zero and set modes
-
+        reset_rotate_encoders();
+        reset_linearSlide_encoders();
+        reset_spin_encoders();
 //        reset_lift1_encoder();          // reset lift motor: set encoders to zero and set modes
 //        reset_spin1_encoder();
 //        reset_spin2_encoder();
@@ -113,6 +112,17 @@ public class BaseRobot extends OpMode {
     @Override
     public void stop() {
 //        front_sensor.enableLed(false);   // turn off the sensor LED to save power
+//        reset_drive_encoders();         // reset all  motors: set encoders to zero and set modes
+//        reset_rotate_encoders();
+//        reset_linearSlide_encoders();
+//        reset_spin_encoders();
+        telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
+        telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
+        telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
+        telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
+        telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
+        telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
+        telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
     }
 
     @Override
@@ -121,19 +131,8 @@ public class BaseRobot extends OpMode {
 //            String detected_color = "";
 //            if (is_black(front_sensor.alpha(), front_sensor.red(), front_sensor.blue())) detected_color = detected_color + " Black ";
 //            if (is_yellow(front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue())) detected_color = detected_color + " Yellow ";
-
 //            telemetry.addData("Timer ", "%.1f", timer.seconds());
 //            telemetry.addData("LIFT1 motor current pos: ", "%d, Color = %s", get_lift1_motor_enc(), detected_color);
-//            telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
-//            telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
-//            telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
-//            telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
-//            telemetry.addData("linearSlide pos:", "linearSlide =%d", get_linearSlide_motor_enc());
-//            telemetry.addData("linearSlide power: ", "linearSlide=%.2f", linearSlide.getPower());
-//            telemetry.addData("topSpin pos:", "topSpin =%d", get_topSpin_motor_enc());
-//            telemetry.addData("topSpin power: ", "topSpin=%.2f", topSpin.getPower());
-            telemetry.addData("rotate1 pos:", "rotate1 =%d", get_rotate1_motor_enc());
-            telemetry.addData("rotate1 power: ", "rotate1 =%.2f", rotate1.getPower());
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
@@ -156,64 +155,93 @@ public class BaseRobot extends OpMode {
 //               telemetry.addData("Distance: ", "%.2fcm", distance_sensor.getDistance(DistanceUnit.CM));
 //            }
         }
-
-
     }
     /* @param power:   the speed to turn at. Negative for reverse
      * @param dist_inches:  move "inches" inches.  "inches" positive for forward
      * @return Whether the target "inches" has been reached.
      */
-
+    // Complicated:  watch out for the +/- signs
+    // The right pos is used as the measure
     public boolean auto_drive(double power, double dist_inch) {
-        int TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * dist_inch);
-        double left_speed = -power;                 // Left motors are running in reverse direction
-        double right_speed = power;
-//        double error = -get_leftFront_motor_enc() - get_rightFront_motor_enc();
-//        error /= ConstantVariables.K_DRIVE_ERROR_P;
-//        left_speed += error; right_speed -= error;
+        int CURR_ENC = get_rightFront_motor_enc();  // the current position
+        int TARGET_ENC;
+        double left_speed = power;                 // Left motors are running in reverse direction
+        double right_speed = -power;               // Right motors are running in reverse direction
 
         left_speed = Range.clip(left_speed, -1, 1);
         right_speed = Range.clip(right_speed, -1, 1);
         leftFront.setPower(left_speed);
-        leftBack.setPower(left_speed);
+        leftBack.setPower(-left_speed);             // Back is the opposite of Front
         rightFront.setPower(right_speed);
-        rightBack.setPower(right_speed);
-
-        if (DEBUG)
-            telemetry.addData("Auto_D - Target_enc: ", "%d/%d", get_rightFront_motor_enc(), TARGET_ENC);
-        if (Math.abs(get_rightFront_motor_enc()) >= TARGET_ENC) { // Arrived at target destination
-            leftFront.setPower(0);
-            leftBack.setPower(0);
-            rightFront.setPower(0);
-            rightBack.setPower(0);
-            return true;
+        rightBack.setPower(-right_speed);           // Back is the opposite of Front
+//        Improvement for accuracy
+//        double error = -get_leftFront_motor_enc() - get_rightFront_motor_enc();
+//        error /= ConstantVariables.K_DRIVE_ERROR_P;
+//        left_speed += error; right_speed -= error;
+        // Right motor is running in reverse direction
+        if (power < 0.0) {  // Right pos is increasing
+            // Move in opposite direction
+            TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * dist_inch * 0.9 + 0.5); // inches to turns
+            if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %d", get_rightFront_motor_enc(), TARGET_ENC);
+            while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
+                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+            }
+        } else {        // Right pos is decreasing
+            TARGET_ENC = -(int) (ConstantVariables.K_PPIN_DRIVE * dist_inch * 0.9 + 0.5); // inches to turns NEGATIVE
+            if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %d", get_rightFront_motor_enc(), TARGET_ENC);
+            while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
+                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+            }
         }
-        return false;
+        leftFront.setPower(0);
+        leftBack.setPower(0);
+        rightFront.setPower(0);
+        rightBack.setPower(0);
+        return true;
+//        TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * dist_inch * 1.5);
+//        if (Math.abs(get_rightFront_motor_enc()) >= TARGET_ENC) { // Arrived at target destination
+//            return true;
+//        }
     }
-    /* @param power:   the speed to turn at. Negative for left.
-     * @param degrees: the number of degrees to turn.
-     * @return Whether the target angle has been reached.
-     */
+        /* @param power:   the speed to turn at. Negative for left.
+         * @param degrees: the number of degrees to turn. ALWAYS POSITIVE
+         * @return Whether the target angle has been reached.
+         */
+        // Use the right front encoder as a measure of the amount of turn
+        // The right front motor is mounted in reverse!!!
     public boolean auto_turn(double power, double degrees) {
-        double TARGET_ENC = Math.abs(ConstantVariables.K_PPDEG_DRIVE * degrees);  // degrees to turns
+        int CURR_ENC = get_rightFront_motor_enc();
+        int TARGET_ENC;
+//        double TARGET_ENC = Math.abs(ConstantVariables.K_PPDEG_DRIVE * degrees * 1.0);  // degrees to turns
         double speed = Range.clip(power, -1, 1);
-        leftFront.setPower(-speed);
-        leftBack.setPower(-speed);
-        rightFront.setPower(-speed);
-        rightBack.setPower(-speed);
-
-        if (DEBUG) telemetry.addData("AUTO_T - TURNING TO ENC: ", TARGET_ENC);
-        if (Math.abs(get_rightFront_motor_enc()) >= TARGET_ENC) {
-            leftFront.setPower(0);
-            leftBack.setPower(0);
-            rightFront.setPower(0);
-            rightBack.setPower(0);
-            return true;
-        } else {
-            return false;
+//        if (DEBUG) telemetry.addData("AUTO_TU:", "Curr=%d, Tar=%d", CURR_ENC, TARGET_ENC);
+        leftFront.setPower(speed);
+        leftBack.setPower(-speed);          // Back is the opposite of Front
+        rightFront.setPower(speed);         // Right is the same direction of Left which means turns in opposite direction
+        rightBack.setPower(-speed);         // Back is the opposite of Front
+        // Right front motor is running in opposite direction
+        if (power < 0) {                    // Turning left -> right pos is decreasing
+            TARGET_ENC = -(int) (ConstantVariables.K_PPDEG_DRIVE * degrees * 1.2 + 0.5);  // degrees to turns NEGATIVE
+            while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
+                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+            }
+        } else {                            // Turning right -> right pos is increasing
+            TARGET_ENC = (int) (ConstantVariables.K_PPDEG_DRIVE * degrees * 1.1 + 0.5);  // degrees to turns
+            while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
+                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+            }
         }
+        leftFront.setPower(0.0);
+        leftBack.setPower(0.0);
+        rightFront.setPower(0.0);
+        rightBack.setPower(0.0);
+        return true;
     }
-
+//        if (get_rightFront_motor_enc() == (CURR_ENC + TARGET_ENC)) {  // get encoder = the difference
+//            return true;
+//        } else {
+//        }
+//    }
 
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
@@ -240,7 +268,6 @@ public class BaseRobot extends OpMode {
             return false;
         }
     }
-
  */
 
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
@@ -252,9 +279,9 @@ public class BaseRobot extends OpMode {
         double rightBackPower = Range.clip(rightPwr + lateralpwr, -1.0, 1.0);
 
         leftFront.setPower(leftFrontPower);
-        leftBack.setPower(leftBackPower);
+        leftBack.setPower(-leftBackPower);
         rightFront.setPower(rightFrontPower);
-        rightBack.setPower(rightBackPower);
+        rightBack.setPower(-rightBackPower);
     }
 
     // lateralpwr: pos for right, neg for left
@@ -299,25 +326,26 @@ public class BaseRobot extends OpMode {
         //   RB_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
 
         leftFront.setPower(leftPower);
-        leftBack.setPower(-leftPower);
+        leftBack.setPower(-leftPower);      // back is opposite to front?
         rightFront.setPower(rightPower);    // right is opposite to left
-        rightBack.setPower(-rightPower);     // right is opposite to left
+        rightBack.setPower(-rightPower);    // back is opposite to front?
         if (DEBUG)
-            telemetry.addData("TANK- Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
+            telemetry.addData("TANK-Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
     }
 
     public static void linearSlideSetPosition(DcMotor motor, int targetPosition) {
         double power = 0.5;
+        //  Assuming postition is always positive?
         if (motor.getCurrentPosition() > targetPosition) power = -power;  // Reverse direction
 
-        motor.setTargetPosition(targetPosition);
+        motor.setTargetPosition(targetPosition);  // Position has to be set before set mode
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        motor.setTargetPosition(targetPosition);
 //        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor.setPower(power);
-        while (motor.isBusy()) {
+        while (motor.isBusy()) {   // Need improvement, motor may be stuck
         }
         motor.setPower(0);
         return;
@@ -348,8 +376,6 @@ public class BaseRobot extends OpMode {
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-
-
         // intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // The motor is to do its best to run at targeted velocity.
 //        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -366,27 +392,34 @@ public class BaseRobot extends OpMode {
         // intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void reset_linearSlide_encoders() {
+        // The motor is to set the current encoder position to zero.
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // The motor is simply to run at whatever velocity is achieved by apply a particular power level to the motor.
+        linearSlide.setPower(0.0);
         linearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void reset_spin_encoders() {
+        // The motor is to set the current encoder position to zero.
         topSpin.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // The motor is simply to run at whatever velocity is achieved by apply a particular power level to the motor.
+        topSpin.setPower(0.0);
         topSpin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void reset_rotate_encoders() {
+        // The motor is to set the current encoder position to zero.
         rotate1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // The motor is simply to run at whatever velocity is achieved by apply a particular power level to the motor.
+        rotate1.setPower(0.0);
         rotate1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /*    public void reset_lift1_encoder() {
-            // The motor is to set the current encoder position to zero.
-            lift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            // The motor is to attempt to rotate in whatever direction is necessary to cause
-            // the encoder reading to advance or retreat from its current setting to the setting
-            // which has been provided through the setTargetPosition() method.
             lift1.setTargetPosition(0);                        // Set to zero before RUN_TO_POSITION
             lift1.setPower(0.5*ConstantVariables.K_LIFT_MAX_PWR);  // Half power is sufficient
             lift1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // The motor is to attempt to rotate in whatever direction is necessary to cause
+        // the encoder reading to advance or retreat from its current setting to the setting
+        // which has been provided through the setTargetPosition() method.
     //        lift1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
      */
@@ -395,12 +428,6 @@ public class BaseRobot extends OpMode {
 //        spin1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        spin1.setPower(ConstantVariables.K_LIFT_MAX_PWR);
 //        spin1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//    }
-//    public void reset_spin2_encoder() {
-    // The motor is to set the current encoder position to zero.
-//       spin2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        spin2.setPower(ConstantVariables.K_LIFT_MAX_PWR);
-//        spin2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //    }
     //get leftBack encoder
     public int get_leftBack_motor_enc() {
@@ -442,6 +469,4 @@ public class BaseRobot extends OpMode {
 //
         return rotate1.getCurrentPosition();
     }
-
-
 }

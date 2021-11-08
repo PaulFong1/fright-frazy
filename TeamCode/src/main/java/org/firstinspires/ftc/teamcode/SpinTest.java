@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 // Created  for 16887.
-@Autonomous(name="Tank Test", group="Simple")
+@Autonomous(name="Spin Test", group="Simple")
 //@Disabled
-public class TankTest extends BaseRobot {
+public class SpinTest extends BaseRobot {
     private int stage = 0;
 
     @Override
@@ -27,7 +23,20 @@ public class TankTest extends BaseRobot {
 
     @Override
     public void loop() {
-        tank_drive(0.3, 0.3);
+        if (time<4.5) {
+            topSpin.setPower(0.2);
+            //reset_drive_encoders();
+        } else if (time <10.0) {
+            topSpin.setPower(-0.2);
+            //reset_drive_encoders();
+        } else if (time <15.0) {
+            topSpin.setPower(0.5);
+        } else if (time<20.0) {
+            topSpin.setPower(-0.5);
+        } else if (time<25.0) {
+            topSpin.setPower(0.75);
+        } else
+            topSpin.setPower(0.0);
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

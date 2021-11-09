@@ -11,7 +11,7 @@ public class MainTeleOp extends BaseRobot {
     private int firstLevel = 0;
     private int secondLevel = 200;
     private int thirdLevel = 800;
-
+    private boolean turned = false;
     @Override
     public void init() {
         super.init();
@@ -41,7 +41,16 @@ public class MainTeleOp extends BaseRobot {
         reset_spin_encoders();//     }
         // Turn the top spinning wheel: left for clockwise and right for anticlockwise
 
-        /* if (gamepad1.left_bumper)       box_Spin.setPosition(0.5);
+        if (gamepad1.left_bumper)
+            if (turned)
+            {
+                box_Spin.setPosition(box_Spin.getPosition() - 0.5);
+                telemetry.addData("tilt direction: ", box_Spin.getPosition());
+            }
+            else { 
+                box_Spin.setPosition(box_Spin.getPosition() + 0.5);
+                turned = true;
+                }
 
        else if (gamepad1.right_bumper)
        {
@@ -50,7 +59,7 @@ public class MainTeleOp extends BaseRobot {
 
         }
         else
-            topSpin.setPower(0);*/
+            topSpin.setPower(0);
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
         else if (get_linearSlide_motor_enc() < thirdLevel - 100) stage = 1;

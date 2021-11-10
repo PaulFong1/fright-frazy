@@ -11,7 +11,7 @@ public class MainTeleOp extends BaseRobot {
     private int firstLevel = 0;
     private int secondLevel = 200;
     private int thirdLevel = 800;
-    private boolean turned = false;
+  //  private boolean turned = false;
     @Override
     public void init() {
         super.init();

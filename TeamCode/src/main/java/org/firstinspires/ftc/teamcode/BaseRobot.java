@@ -37,6 +37,10 @@ public class BaseRobot extends OpMode {
         topSpin = hardwareMap.get(DcMotor.class, "topSpin");
         linearSlide = hardwareMap.get(DcMotor.class, "linearSlide");
         rotate1 = hardwareMap.get(DcMotor.class, "rotate1");
+
+        box_Spin = hardwareMap.get(Servo.class, "box_spin");
+
+        axle_spin = hardwareMap.get(CRServo.class, "axle_spin");
         //intake  = hardwareMap.get(DcMotor.class, "intake");
 
 //        front_sensor = hardwareMap.get(ColorSensor.class, "front_sensor");
@@ -55,8 +59,10 @@ public class BaseRobot extends OpMode {
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("INI Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("INI Servo dir: ", "LEFT=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
-        telemetry.addData("INI Servo pos: ", "LEFT=%.2f, RIGHT=%.2f",  box_Spin.getPosition());
+
+//        telemetry.addData("INI Servo dir: ", "LEFT=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
+        telemetry.addData("INI Servo pos: ", "=%.2f",  box_Spin.getPosition());//%.2f
+
         // BRAKE: The motor stops and then brakes, actively resisting any external force which attempts to turn the motor.
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -105,8 +111,8 @@ public class BaseRobot extends OpMode {
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("START Servo dir: ", "LEFT=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
-         telemetry.addData("START Servo pos: ", "LEFT=%.2f, RIGHT=%.2f", box_Spin.getPosition());
+      //  telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
+         telemetry.addData("START Servo pos: ", "=%.2f", box_Spin.getPosition());
     }
 
     @Override
@@ -143,7 +149,7 @@ public class BaseRobot extends OpMode {
 
             // telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
             // telemetry.addData("intake  power: ", "intake =%.2f", intake.getPower());
-            telemetry.addData("Servo pos: ", "Left=%.2f, Right=%.2f", box_Spin.getPosition());
+            telemetry.addData("Servo pos: ", "=%.2f", box_Spin.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
 //            telemetry.addData("Green：", front_sensor.green());
@@ -312,7 +318,7 @@ public class BaseRobot extends OpMode {
         leftBack.setPower(leftBackPower);
         rightFront.setPower(rightFrontPower);
         rightBack.setPower(rightBackPower);
-        if (DEBUG) telemetry.addData("TANK- Lateral: ", lateralpwr);
+        if (DEBUG) telemetry.addData("TANK- Lateral: ", "=%.2f",lateralpwr);
     }
 
     public void tank_drive(double leftPwr, double rightPwr) {
@@ -439,34 +445,28 @@ public class BaseRobot extends OpMode {
 
     //get leftFront encoder
     public int get_leftFront_motor_enc() {
-//
         return leftFront.getCurrentPosition();
     }
 
     //get rightBack encoder
     public int get_rightBack_motor_enc() {
-//
         return rightBack.getCurrentPosition();
     }
 
     //get rightFront encoder
     public int get_rightFront_motor_enc() {
-//
         return rightFront.getCurrentPosition();
     }
 
     public int get_linearSlide_motor_enc() {
-//
         return linearSlide.getCurrentPosition();
     }
 
     public int get_topSpin_motor_enc() {
-//
         return topSpin.getCurrentPosition();
     }
 
     public int get_rotate1_motor_enc() {
-//
         return rotate1.getCurrentPosition();
     }
 }

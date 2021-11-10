@@ -45,7 +45,7 @@ public class MainTeleOp extends BaseRobot {
             if (turned)
             {
                 box_Spin.setPosition(box_Spin.getPosition() - 0.5);
-                telemetry.addData("tilt direction: ", box_Spin.getPosition());
+                telemetry.addData("tilt direction: ","=%.2f", box_Spin.getPosition());
             }
             else { 
                 box_Spin.setPosition(box_Spin.getPosition() + 0.5);
@@ -65,8 +65,8 @@ public class MainTeleOp extends BaseRobot {
         else if (get_linearSlide_motor_enc() < thirdLevel - 100) stage = 1;
         else stage = 2;
 
-        telemetry.addData("lift enc: ", linearSlide.getCurrentPosition());
-        telemetry.addData("stage: ", stage);
+        telemetry.addData("lift enc: ", "=%.2f", linearSlide.getCurrentPosition());
+        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
         if (gamepad1.x && stage < 2) {
@@ -112,10 +112,6 @@ public class MainTeleOp extends BaseRobot {
 //            }
 //
 //        } else linearSlide.setPower(0);
-//
-        if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
-        super.loop();
-
         if (gamepad1.left_trigger > 0.5)
             topSpin.setPower(0.5);
         else
@@ -126,10 +122,14 @@ public class MainTeleOp extends BaseRobot {
             rotate1.setPower(-0.5);
 
         } else if (gamepad1.dpad_up) {
-            rotate1.setPower(0.5);
+            rotate1.setPower(0.7);
 
         } else {
             rotate1.setPower(0);
+
+            if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
+        super.loop();
+
 
 
         }

@@ -38,7 +38,7 @@ public class BaseRobot extends OpMode {
         linearSlide = hardwareMap.get(DcMotor.class, "linearSlide");
         rotate1 = hardwareMap.get(DcMotor.class, "rotate1");
 
-        box_Spin = hardwareMap.get(Servo.class, "box_spin");
+        box_Spin = hardwareMap.get(Servo.class, "box_Spin");
 
         axle_spin = hardwareMap.get(CRServo.class, "axle_spin");
         //intake  = hardwareMap.get(DcMotor.class, "intake");

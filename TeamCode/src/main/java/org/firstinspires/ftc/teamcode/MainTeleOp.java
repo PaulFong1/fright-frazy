@@ -20,11 +20,15 @@ public class MainTeleOp extends BaseRobot {
     @Override
     public void start() {
         super.start();
+
     }
 
     @Override
     public void loop() {
-
+        //     reset_drive_encoders();
+        //    reset_linearSlide_encoders();
+        //    reset_rotate_encoders();
+        //     reset_spin_encoders();
         //        tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
@@ -35,31 +39,36 @@ public class MainTeleOp extends BaseRobot {
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
         //       else if (gamepad1.dpad_down) auto_drive(-0.75, 0.5);
-        reset_drive_encoders();
-        reset_linearSlide_encoders();
-        reset_rotate_encoders();
-        reset_spin_encoders();//     }
-        // Turn the top spinning wheel: left for clockwise and right for anticlockwise
 
+
+        //     }
+
+        if (gamepad1.a)
+            box_Spin.setPosition(0.5);
+        if (gamepad1.b)
+            box_Spin.setPosition(0);
+ /*
         if (gamepad1.left_bumper)
             if (turned)
             {
                 box_Spin.setPosition(box_Spin.getPosition() - 0.5);
                 telemetry.addData("tilt direction: ","=%.2f", box_Spin.getPosition());
             }
-            else { 
+            else {
                 box_Spin.setPosition(box_Spin.getPosition() + 0.5);
                 turned = true;
                 }
 
-       else if (gamepad1.right_bumper)
-       {
-        while (gamepad1.right_bumper)
-            axle_spin.setPower(0.3);
 
-        }
-        else
-            topSpin.setPower(0);
+  */
+
+       if (gamepad1.right_bumper)
+            axle_spin.setPower(0.7);
+       else if (gamepad1.left_bumper)
+            axle_spin.setPower(-0.7);
+       else
+           axle_spin.setPower(0);
+
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
         else if (get_linearSlide_motor_enc() < thirdLevel - 100) stage = 1;
@@ -76,7 +85,7 @@ public class MainTeleOp extends BaseRobot {
             linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
             stage--;
         } else if (gamepad1.dpad_right) {
-            linearSlide.setPower(1.0);
+            linearSlide.setPower(0.8);
             if (linearSlide.getCurrentPosition() >= secondLevel) {
                 stage = 1;
             }
@@ -112,19 +121,23 @@ public class MainTeleOp extends BaseRobot {
 //            }
 //
 //        } else linearSlide.setPower(0);
+
         if (gamepad1.left_trigger > 0.5)
-            topSpin.setPower(0.5);
+            topSpin.setPower(0.7);
         else
             topSpin.setPower(0);
+        if (gamepad1.right_trigger>0.5)
+            topSpin.setPower(-0.7);
+        else topSpin.setPower(0);
 
 
-        if (gamepad1.dpad_down) {
+        if (gamepad1.dpad_down)
             rotate1.setPower(-0.5);
 
-        } else if (gamepad1.dpad_up) {
+         else if (gamepad1.dpad_up)
             rotate1.setPower(0.7);
 
-        } else {
+        else
             rotate1.setPower(0);
 
             if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
@@ -135,4 +148,4 @@ public class MainTeleOp extends BaseRobot {
         }
 
     }
-}
+

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @Autonomous(name="BlueDuck", group="Simple")
 //@Disabled
 public class BlueDuck extends BaseRobot {
-    private int stage = 0;
+    private int step = 0;
 
     @Override
     public void init() {
@@ -23,22 +23,22 @@ public class BlueDuck extends BaseRobot {
 
     @Override
     public void loop() {
-        switch (stage) {
+        switch (step) {
             case 0:
                 auto_drive(0.3, 12);
-                stage++;
+                step++;
                 break;
             case 1:
                 topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
-                stage++;
+                step++;
                 break;
             case 2:
                 auto_turn(0.3, 115);
-                stage++;
+                step++;
                 break;
             case 3:
                 auto_drive(-0.3, 48);
-                //   stage++;
+                //   step++;
                 break;
             default:
                 break;

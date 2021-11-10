@@ -30,15 +30,15 @@ public class DriveTest extends BaseRobot {
             case 0:         auto_drive(0.3, 12);
                 stage++;
                 break;
-            case 1:         auto_drive(-0.3, 12);
+            case 1:   topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
                 stage++;
                 break;
             case 2:         auto_drive(0.3, 24);
                 stage++;
                 break;
-            case 3:         auto_drive(-0.3, 24);
-                stage++;
-                break;
+         //   case 3:         //auto_drive(-0.3, 24);
+           //     stage++;
+             //   break;
             default: break;
         }
         if (DEBUG) {

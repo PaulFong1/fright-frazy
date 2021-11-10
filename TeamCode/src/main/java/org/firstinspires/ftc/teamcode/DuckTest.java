@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="Drive Test", group="Simple")
+@Autonomous(name="DuckTest", group="Simple")
 //@Disabled
-public class DriveTest extends BaseRobot {
+public class DuckTest extends BaseRobot {
     private int stage = 0;
 
     @Override

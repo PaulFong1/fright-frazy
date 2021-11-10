@@ -40,7 +40,7 @@ public class BaseRobot extends OpMode {
 
         box_Spin = hardwareMap.get(Servo.class, "box_Spin");
 
-        axle_spin = hardwareMap.get(CRServo.class, "axle_spin");
+        axle_spin = hardwareMap.get(CRServo.class, "axle_Spin");
         //intake  = hardwareMap.get(DcMotor.class, "intake");
 
 //        front_sensor = hardwareMap.get(ColorSensor.class, "front_sensor");

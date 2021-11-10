@@ -43,9 +43,9 @@ public class MainTeleOp extends BaseRobot {
 
         //     }
 
-        if (gamepad1.a)
+        if (gamepad1.left_bumper)
             box_Spin.setPosition(0.5);
-        if (gamepad1.b)
+        if (gamepad1.right_bumper)
             box_Spin.setPosition(0);
  /*
         if (gamepad1.left_bumper)
@@ -62,9 +62,9 @@ public class MainTeleOp extends BaseRobot {
 
   */
 
-       if (gamepad1.right_bumper)
+       if (gamepad1.a)
             axle_spin.setPower(0.7);
-       else if (gamepad1.left_bumper)
+       else if (gamepad1.b)
             axle_spin.setPower(-0.7);
        else
            axle_spin.setPower(0);
@@ -74,8 +74,8 @@ public class MainTeleOp extends BaseRobot {
         else if (get_linearSlide_motor_enc() < thirdLevel - 100) stage = 1;
         else stage = 2;
 
-        telemetry.addData("lift enc: ", "=%.2f", linearSlide.getCurrentPosition());
-        telemetry.addData("stage: ", "=%d",stage);
+//        telemetry.addData("lift enc: ", "=%.2f", linearSlide.getCurrentPosition());
+//        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
         if (gamepad1.x && stage < 2) {

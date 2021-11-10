@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="Spin Test", group="Simple")
+@Autonomous(name="RedDuckTest", group="Simple")
 //@Disabled
-public class SpinTest extends BaseRobot {
+public class RedDuck extends BaseRobot {
     private int stage = 0;
 
     @Override
@@ -23,20 +26,21 @@ public class SpinTest extends BaseRobot {
 
     @Override
     public void loop() {
-        if (time<4.5) {
-            topSpin.setPower(0.2);
-            //reset_drive_encoders();
-        } else if (time <10.0) {
-            topSpin.setPower(-0.2);
-            //reset_drive_encoders();
-        } else if (time <15.0) {
-            topSpin.setPower(0.5);
-        } else if (time<20.0) {
-            topSpin.setPower(-0.5);
-        } else if (time<25.0) {
-            topSpin.setPower(0.75);
-        } else
-            topSpin.setPower(0.0);
+        switch (stage) {
+            case 0:         auto_drive(0.3, 12);
+                stage++;
+                break;
+            case 1:   topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
+                stage++;
+                break;
+            case 2:         auto_turn(0.3, 115);
+                stage++;
+                break;
+           case 3:         auto_drive(-0.3, 48);
+            //    stage++;
+                break;
+            default: break;
+        }
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

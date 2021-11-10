@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
+
 // Created  for 16887.
-@Autonomous(name="DuckTest", group="Simple")
+@Autonomous(name="BlueDuck", group="Simple")
 //@Disabled
-public class DuckTest extends BaseRobot {
+public class BlueDuck extends BaseRobot {
     private int stage = 0;
 
     @Override
@@ -27,19 +24,24 @@ public class DuckTest extends BaseRobot {
     @Override
     public void loop() {
         switch (stage) {
-            case 0:         auto_drive(0.3, 12);
+            case 0:
+                auto_drive(0.3, 12);
                 stage++;
                 break;
-            case 1:   topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
+            case 1:
+                topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
                 stage++;
                 break;
-            case 2:         auto_drive(0.3, 24);
+            case 2:
+                auto_turn(0.3, 115);
                 stage++;
                 break;
-         //   case 3:         //auto_drive(-0.3, 24);
-           //     stage++;
-             //   break;
-            default: break;
+            case 3:
+                auto_drive(-0.3, 48);
+                //   stage++;
+                break;
+            default:
+                break;
         }
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());

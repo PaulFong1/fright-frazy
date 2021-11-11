@@ -22,7 +22,7 @@ public class BaseRobot extends OpMode {
 //    public DistanceSensor distance_sensor;
     public ElapsedTime timer = new ElapsedTime();
     public boolean DEBUG=false;                     // Debug flag
-//    public Boolean autonmous = false;
+//    public Boolean autonomous = false;
 
     @Override
     public void init() {

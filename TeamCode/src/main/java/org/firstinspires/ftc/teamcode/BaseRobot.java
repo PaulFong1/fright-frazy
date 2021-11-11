@@ -25,8 +25,13 @@ public class BaseRobot extends OpMode {
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
     public ElapsedTime timer = new ElapsedTime();
-    public boolean DEBUG = true;                     // Debug flag = false
+
+    public boolean DEBUG=false;                     // Debug flag
+//    public Boolean autonomous = false;
+
+    //public boolean DEBUG = true;                     // Debug flag = false
 //    public Boolean autonmous = false;
+
 
     @Override
     public void init() {

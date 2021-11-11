@@ -21,7 +21,7 @@ public class BaseRobot extends OpMode {
 // public Servo top_spin;                                       // The top spinning wheel
 
 
-      public CRServo axle_spin, box_Spin;
+      public CRServo axle_Spin, box_Spin;
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
     public ElapsedTime timer = new ElapsedTime();
@@ -46,7 +46,7 @@ public class BaseRobot extends OpMode {
 
         box_Spin = hardwareMap.get(CRServo.class, "box_Spin");
 
-        axle_spin = hardwareMap.get(CRServo.class, "axle_Spin");
+        axle_Spin = hardwareMap.get(CRServo.class, "axle_Spin");
         //intake  = hardwareMap.get(DcMotor.class, "intake");
 
 //        front_sensor = hardwareMap.get(ColorSensor.class, "front_sensor");
@@ -67,7 +67,7 @@ public class BaseRobot extends OpMode {
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("INI Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
 
-        telemetry.addData("INI Servo dir: ", "LEFT=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
+        telemetry.addData("INI Servo dir: ", "Axle=%s, Box=%s", axle_Spin.getDirection(), box_Spin.getDirection());
 
 
         // BRAKE: The motor stops and then brakes, actively resisting any external force which attempts to turn the motor.
@@ -120,7 +120,7 @@ public class BaseRobot extends OpMode {
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", axle_spin.getDirection(), box_Spin.getDirection());
+    //    telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", axle_Spin.getDirection(), box_Spin.getDirection());
 
     }
 
@@ -160,7 +160,7 @@ public class BaseRobot extends OpMode {
 
             // telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
             // telemetry.addData("intake  power: ", "intake =%.2f", intake.getPower());
-            telemetry.addData("Box_Servo pos: ", "=%.2f", box_Spin.getDirection());
+        //    telemetry.addData("Box_Servo pos: ", "=%.2f", box_Spin.get());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
 //            telemetry.addData("Green：", front_sensor.green());
@@ -342,7 +342,7 @@ public class BaseRobot extends OpMode {
         //   LB_Power = Range.clip(leftFrontPower * ConstantVariables.K_LB_ADJUST, -1.0, 1.0);
         //   RB_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
 
-        leftFront.setPower(+leftPower);//+
+        leftFront.setPower(-leftPower);//+
         leftBack.setPower(leftPower);   //-   // back is opposite to front?
         rightFront.setPower(-rightPower);  //+  // right is opposite to left
         rightBack.setPower(rightPower);  //-  // back is opposite to front?

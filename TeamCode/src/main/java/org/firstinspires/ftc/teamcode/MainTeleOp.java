@@ -22,7 +22,8 @@ public class MainTeleOp extends BaseRobot {
     public void start() {
         super.start();
        // axle_spin.resetDeviceConfigurationForOpMode();
-
+        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
@@ -37,6 +38,7 @@ public class MainTeleOp extends BaseRobot {
 
         tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Mini movements
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
@@ -46,17 +48,18 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPower(0.05);
+            box_Spin.setPower(0.1);
         if (gamepad1.right_bumper)
-            box_Spin.setPower(0.05);
+            box_Spin.setPower(-0.1);
+        else box_Spin.setPower(0);
 
 
        if (gamepad1.a)
-            axle_spin.setPower(1.0);
+            axle_Spin.setPower(1.0);
        else if (gamepad1.b)
-            axle_spin.setPower(-1.0);
+            axle_Spin.setPower(-1.0);
        else
-            axle_spin.setPower(0);
+            axle_Spin.setPower(0);
 
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
@@ -70,18 +73,24 @@ public class MainTeleOp extends BaseRobot {
         if (gamepad1.x && stage < 2) {
             linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
             stage++;
-        } else if (gamepad1.y && stage > 0) {
+        }
+
+        else if (gamepad1.y && stage > 0) {
             linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
             stage--;
-        } else if (gamepad1.dpad_right) {
-            linearSlide.setPower(0.8);
+        }
+
+        else if (gamepad1.dpad_right) {
+            linearSlide.setPower(0.7);
             if (linearSlide.getCurrentPosition() >= secondLevel) {
                 stage = 1;
             }
             if (linearSlide.getCurrentPosition() >= thirdLevel) {
                 stage = 2;
             }
-        } else if (gamepad1.dpad_left) {
+        }
+
+        else if (gamepad1.dpad_left) {
             linearSlide.setPower(-0.1);
             if (linearSlide.getCurrentPosition() <= secondLevel) {
                 stage = 1;
@@ -119,14 +128,20 @@ public class MainTeleOp extends BaseRobot {
         else topSpin.setPower(0);
 
 
-        if (gamepad1.dpad_down)
+        if (gamepad1.dpad_down) {
             rotate1.setPower(-0.4);
-
-         else if (gamepad1.dpad_up)
+            rotate2.setPower(-0.4);
+        }
+         else if (gamepad1.dpad_up){
             rotate1.setPower(0.7);
+         rotate2.setPower(0.7);}
 
-        else
+        else {
             rotate1.setPower(0);
+            rotate2.setPower(0);
+
+        }
+
 
 
             if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-//
+
 // Created for 16887.
 @TeleOp(name="Test TeleOp", group="_Other")
 //@Disabled
@@ -63,7 +63,7 @@ public class TestTeleOp extends BaseRobot {
 
 
 
-
+/*
         if (gamepad1.x)
         {
             if (stage<2 && get_linearSlide_motor_enc() < 510)
@@ -82,6 +82,8 @@ public class TestTeleOp extends BaseRobot {
 
         }
     else linearSlide.setPower(0);
+
+ */
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

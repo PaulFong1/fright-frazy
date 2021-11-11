@@ -21,6 +21,7 @@ public class MainTeleOp extends BaseRobot {
     @Override
     public void start() {
         super.start();
+       // axle_spin.resetDeviceConfigurationForOpMode();
 
     }
 
@@ -35,7 +36,7 @@ public class MainTeleOp extends BaseRobot {
 
 
         tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
-
+        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Mini movements
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
@@ -48,27 +49,14 @@ public class MainTeleOp extends BaseRobot {
             box_Spin.setPosition(0.5);
         if (gamepad1.right_bumper)
             box_Spin.setPosition(0);
- /*
-        if (gamepad1.left_bumper)
-            if (turned)
-            {
-                box_Spin.setPosition(box_Spin.getPosition() - 0.5);
-                telemetry.addData("tilt direction: ","=%.2f", box_Spin.getPosition());
-            }
-            else {
-                box_Spin.setPosition(box_Spin.getPosition() + 0.5);
-                turned = true;
-                }
 
-
-  */
 
        if (gamepad1.a)
             axle_spin.setPower(0.7);
        else if (gamepad1.b)
             axle_spin.setPower(-0.7);
        else
-           axle_spin.setPower(0);
+            axle_spin.setPower(0);
 
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
@@ -125,21 +113,21 @@ public class MainTeleOp extends BaseRobot {
 
         if (gamepad1.left_trigger > 0.5)
             topSpin.setPower(0.7);
-        else
-            topSpin.setPower(0);
-        if (gamepad1.right_trigger>0.5)
+
+        else if (gamepad1.right_trigger>0.5)
             topSpin.setPower(-0.7);
         else topSpin.setPower(0);
 
 
         if (gamepad1.dpad_down)
-            rotate1.setPower(-0.5);
+            rotate1.setPower(-0.4);
 
          else if (gamepad1.dpad_up)
             rotate1.setPower(0.7);
 
         else
             rotate1.setPower(0);
+
 
             if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

@@ -52,9 +52,9 @@ public class MainTeleOp extends BaseRobot {
 
 
        if (gamepad1.a)
-            axle_spin.setPower(0.7);
+            axle_spin.setPower(1.0);
        else if (gamepad1.b)
-            axle_spin.setPower(-0.7);
+            axle_spin.setPower(-1.0);
        else
             axle_spin.setPower(0);
 

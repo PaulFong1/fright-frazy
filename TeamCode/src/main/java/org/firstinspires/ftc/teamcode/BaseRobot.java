@@ -149,7 +149,7 @@ public class BaseRobot extends OpMode {
 
             // telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
             // telemetry.addData("intake  power: ", "intake =%.2f", intake.getPower());
-            telemetry.addData("Servo pos: ", "=%.2f", box_Spin.getPosition());
+            telemetry.addData("Box_Servo pos: ", "=%.2f", box_Spin.getPosition());
 //            telemetry.addData("Sen: ", " %d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //            telemetry.addData("Red：", front_sensor.red());
 //            telemetry.addData("Green：", front_sensor.green());
@@ -323,18 +323,18 @@ public class BaseRobot extends OpMode {
 
     public void tank_drive(double leftPwr, double rightPwr) {
         rightPwr *= -1;                     // rightPwr is in reverse
-        double leftPower = Range.clip(leftPwr, -1.0, 1.0);
-        double rightPower = Range.clip(rightPwr, -1.0, 1.0);
+        double leftPower = Range.clip(leftPwr, -0.7, 0.7);
+        double rightPower = Range.clip(rightPwr, -0.7, 0.7);
         // Adjustment due to variation in physical motor power
         //   LF_Power = Range.clip(leftFrontPower * ConstantVariables.K_LF_ADJUST, -1.0, 1.0);
         //   RF_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
         //   LB_Power = Range.clip(leftFrontPower * ConstantVariables.K_LB_ADJUST, -1.0, 1.0);
         //   RB_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);
 
-        leftFront.setPower(leftPower);
-        leftBack.setPower(-leftPower);      // back is opposite to front?
-        rightFront.setPower(rightPower);    // right is opposite to left
-        rightBack.setPower(-rightPower);    // back is opposite to front?
+        leftFront.setPower(+leftPower);//+
+        leftBack.setPower(leftPower);   //-   // back is opposite to front?
+        rightFront.setPower(-rightPower);  //+  // right is opposite to left
+        rightBack.setPower(rightPower);  //-  // back is opposite to front?
         if (DEBUG)
             telemetry.addData("TANK-Power: ", "Left=%.2f, Right=%.2f", leftPower, rightPower);
     }

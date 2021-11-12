@@ -38,7 +38,7 @@ public class MainTeleOp extends BaseRobot {
 
         tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Mini movements
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
@@ -48,13 +48,12 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPower(3.0);
+            box_Spin.setPosition(20);
+
+       if (gamepad1.right_bumper)
+            box_Spin.setPosition(-20);
 
 
-       else  if (gamepad1.right_bumper)
-            box_Spin.setPower(-1.0);
-
-        else box_Spin.setPower(0);
 
 
        if (gamepad1.a)
@@ -132,17 +131,22 @@ public class MainTeleOp extends BaseRobot {
 
 
         if (gamepad1.dpad_down) {
-            rotate1.setPower(-0.4);
-        //    rotate2.setPower(-0.4);
+            rotate1.setPower(-0.2);
+            rotate2.setPower(0.1);
         }
          else if (gamepad1.dpad_up){
-            rotate1.setPower(1.0);
-      //   rotate2.setPower(1.0);
+            rotate1.setPower(0.5);
+            rotate2.setPower(0.5);
             }
 
         else {
-            rotate1.setPower(0);
-            rotate2.setPower(0);
+            rotate1.setPower(0.0);
+           rotate2.setPower(0.0);
+
+            //rotate2.setPower(0.05);
+            rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         }
 

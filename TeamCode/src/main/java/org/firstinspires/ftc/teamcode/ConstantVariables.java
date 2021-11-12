@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 // Created for 16887
 public class ConstantVariables {
-    public static final int    K_PPR_DRIVE = 1120;      // Number of ticks per revolution (AndyMark)
-    public static final double K_DRIVE_WHEEL_DIA = 4.5; // Diameter of the mecanum wheel in inches (4)
+    public static final int    K_PPR_DRIVE = 385;      // Number of ticks per revolution (AndyMark) 1120
+    public static final double K_DRIVE_WHEEL_DIA = 4.6; // Diameter of the mecanum wheel in inches (4)
     public static final double K_DRIVE_DIA = 16.5;      // Diameter?
 
     public static final double K_DRIVE_WHEEL_CIRCUMFERENCE = K_DRIVE_WHEEL_DIA * Math.PI;// 12.6 inch

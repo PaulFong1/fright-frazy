@@ -48,9 +48,10 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPower(0.1);
-        if (gamepad1.right_bumper)
-            box_Spin.setPower(-0.1);
+            box_Spin.setPower(1.0);
+
+       else  if (gamepad1.right_bumper)
+            box_Spin.setPower(-1.0);
         else box_Spin.setPower(0);
 
 
@@ -133,15 +134,14 @@ public class MainTeleOp extends BaseRobot {
             rotate2.setPower(-0.4);
         }
          else if (gamepad1.dpad_up){
-            rotate1.setPower(0.7);
-         rotate2.setPower(0.7);}
+            rotate1.setPower(1.0);
+         rotate2.setPower(1.0);}
 
         else {
             rotate1.setPower(0);
             rotate2.setPower(0);
 
         }
-
 
 
             if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag

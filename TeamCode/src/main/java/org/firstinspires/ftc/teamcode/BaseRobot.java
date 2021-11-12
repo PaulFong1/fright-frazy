@@ -20,7 +20,6 @@ public class BaseRobot extends OpMode {
     public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide, rotate1, rotate2;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel
 
-
       public CRServo axle_Spin, box_Spin;
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
@@ -68,7 +67,7 @@ public class BaseRobot extends OpMode {
 //        telemetry.addData("INI Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
 
         telemetry.addData("INI Servo dir: ", "Axle=%s, Box=%s", axle_Spin.getDirection(), box_Spin.getDirection());
-
+    //    telemetry.addData("Box Power", "=%.2f", box_Spin.getPower());
 
         // BRAKE: The motor stops and then brakes, actively resisting any external force which attempts to turn the motor.
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

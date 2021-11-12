@@ -48,10 +48,12 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPower(1.0);
+            box_Spin.setPower(3.0);
+
 
        else  if (gamepad1.right_bumper)
             box_Spin.setPower(-1.0);
+
         else box_Spin.setPower(0);
 
 

@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 public class BaseRobot extends OpMode {
     public DcMotor leftBack, rightBack, leftFront, rightFront, topSpin, linearSlide, rotate1, rotate2;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel
-
+//public Servo box_Spin;
       public CRServo axle_Spin, box_Spin;
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
@@ -44,7 +44,7 @@ public class BaseRobot extends OpMode {
         rotate2 = hardwareMap.get(DcMotor.class, "rotate2");
 
         box_Spin = hardwareMap.get(CRServo.class, "box_Spin");
-
+      //  box_Spin = hardwareMap.get(Servo.class, "box_Spin");
         axle_Spin = hardwareMap.get(CRServo.class, "axle_Spin");
         //intake  = hardwareMap.get(DcMotor.class, "intake");
 

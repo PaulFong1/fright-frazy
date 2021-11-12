@@ -23,7 +23,7 @@ public class MainTeleOp extends BaseRobot {
         super.start();
        // axle_spin.resetDeviceConfigurationForOpMode();
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MainTeleOp extends BaseRobot {
 
         tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         // Mini movements
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
@@ -131,11 +131,12 @@ public class MainTeleOp extends BaseRobot {
 
         if (gamepad1.dpad_down) {
             rotate1.setPower(-0.4);
-            rotate2.setPower(-0.4);
+        //    rotate2.setPower(-0.4);
         }
          else if (gamepad1.dpad_up){
             rotate1.setPower(1.0);
-         rotate2.setPower(1.0);}
+      //   rotate2.setPower(1.0);
+            }
 
         else {
             rotate1.setPower(0);

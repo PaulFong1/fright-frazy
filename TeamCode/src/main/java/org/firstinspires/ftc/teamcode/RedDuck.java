@@ -28,12 +28,19 @@ public class RedDuck extends BaseRobot {
     public void loop() {
         if (time<3)
             auto_drive(-0.3, 5);
-        else if (time<6 && time>3)
+        else if (time<5.1 && time>3)
             topSpin.setPower(-0.7);
-        else if (time<10 && time > 6)
-            auto_turn(-0.7,180);
-        else if (time<17 && time>10)
-            auto_drive(0.5,25);
+        else if (time<10 && time > 5.5) {
+            auto_turn(-0.7,90);
+
+            topSpin.setPower(0);
+            auto_drive(0.6, 100);
+
+
+        }
+    //
+       // else if (time<17 && time>10)
+     //       auto_drive(0.5,25);
         else;
     /*    switch (step) {
             case 0:         auto_drive(-0.3, 27);

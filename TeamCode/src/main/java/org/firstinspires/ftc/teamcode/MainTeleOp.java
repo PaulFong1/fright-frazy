@@ -48,10 +48,10 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPosition(20);
+            box_Spin.setPosition(0.8);
 
        if (gamepad1.right_bumper)
-            box_Spin.setPosition(-20);
+            box_Spin.setPosition(-0.8);
 
 
 

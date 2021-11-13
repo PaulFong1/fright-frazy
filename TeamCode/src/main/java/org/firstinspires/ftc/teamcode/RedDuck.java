@@ -26,21 +26,35 @@ public class RedDuck extends BaseRobot {
 
     @Override
     public void loop() {
-        switch (step) {
-            case 0:         auto_drive(0.3, 12);
+        if (time<3)
+            auto_drive(-0.3, 5);
+        else if (time<6 && time>3)
+            topSpin.setPower(-0.7);
+        else if (time<10 && time > 6)
+            auto_turn(-0.7,180);
+        else if (time<17 && time>10)
+            auto_drive(0.5,25);
+        else;
+    /*    switch (step) {
+            case 0:         auto_drive(-0.3, 27);
                 step++;
                 break;
-            case 1:   topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
+            case 1: if (time<120)
+                topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
                 step++;
                 break;
-            case 2:         auto_turn(0.3, 115);
+            case 2:   topSpin.setPower(0);
+                auto_turn(-0.3, 180);
                 step++;
                 break;
-           case 3:         auto_drive(-0.3, 48);
+           case 3:      //  auto_drive(0.5, 60);
             //    step++;
                 break;
+
             default: break;
         }
+
+     */
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

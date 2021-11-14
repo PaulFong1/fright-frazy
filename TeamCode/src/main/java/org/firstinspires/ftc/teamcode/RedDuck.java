@@ -26,31 +26,31 @@ public class RedDuck extends BaseRobot {
 
     @Override
     public void loop() {
-        if (time<1.6) {
+        if (time<2.25) {
             tank_drive(0.3,0.3);
       //      auto_drive(-0.3, 5);
-            rotate1.setPower(-0.3);
+         //   rotate1.setPower(-0.3);
         }
-        else if (time<5.1 && time>3.0) {
+        else if (time<5.2 && time>3.0) {
             topSpin.setPower(-0.5);
-            rotate1.setPower(-0.5);
+          //  rotate1.setPower(-0.5);
         }
 
-        else if (time>5.1 && time <5.5)
+        else if (time>5.3 && time <6.4)
         {
             tank_drive(-0.2,-0.2);
         }
-        else if (time<6.2 && time > 5.5) {
-            auto_turn(-0.5,5);
+        else if (time<7.4 && time > 6.4) {
+            auto_turn(-0.4,12);
 
 
 
         }
 
-        else if (time<8 && time > 7)
-            rotate1.setPower(-0.8);
+      // else if (time<8.4 && time > 7.4){}
+//            rotate1.setPower(-0.8);
 
-        else if (time<14 && time > 10) {
+        else if (time<13 && time > 9.5) {
 
             tank_drive(-0.5,-0.5);
         }
@@ -61,7 +61,7 @@ public class RedDuck extends BaseRobot {
         {
 
             tank_drive(0,0);
-            topSpin.setPower(0);
+           // topSpin.setPower(0);
             return;
 
         }

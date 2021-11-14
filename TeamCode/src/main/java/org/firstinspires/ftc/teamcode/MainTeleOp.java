@@ -140,10 +140,10 @@ public class MainTeleOp extends BaseRobot {
             rotate1.setPower(0.3);
            // rotate2.setPower(0.5);
             }
-        else if (get_rotate1_motor_enc()<-100)
+        else if (get_rotate1_motor_enc()>100)
             rotate1.setPower(-0.3);
 
-        else if (get_rotate1_motor_enc()<-200)
+        else if (get_rotate1_motor_enc()>200)
             rotate1.setPower(-0.4);
         else {
             rotate1.setPower(0.0);

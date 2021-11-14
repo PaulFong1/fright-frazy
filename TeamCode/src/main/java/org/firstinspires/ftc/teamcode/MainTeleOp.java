@@ -23,6 +23,7 @@ public class MainTeleOp extends BaseRobot {
         super.start();
        // axle_spin.resetDeviceConfigurationForOpMode();
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
@@ -49,10 +50,10 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPosition(0.1);
+            box_Spin.setPosition(0.5);
 
        if (gamepad1.right_bumper)
-            box_Spin.setPosition(0.2);
+            box_Spin.setPosition(0.0);
 
 
 

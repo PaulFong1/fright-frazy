@@ -28,6 +28,7 @@ public class MainTeleOp extends BaseRobot {
 
     @Override
     public void loop() {
+        telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
@@ -131,17 +132,22 @@ public class MainTeleOp extends BaseRobot {
 
 
         if (gamepad1.dpad_up) {
-            rotate1.setPower(-0.8);
+            rotate1.setPower(-0.9);
             //rotate2.setPower(0.1);
         }
          else if (gamepad1.dpad_down){
             rotate1.setPower(0.3);
            // rotate2.setPower(0.5);
             }
-        else if (get_rotate1_motor_enc()>-2)
+        else if (get_rotate1_motor_enc()<-100)
             rotate1.setPower(-0.3);
+
+        else if (get_rotate1_motor_enc()<-200)
+            rotate1.setPower(-0.4);
         else {
             rotate1.setPower(0.0);
+
+
          //  rotate2.setPower(0.0);
 
             //rotate2.setPower(0.05);

@@ -26,22 +26,39 @@ public class RedDuck extends BaseRobot {
 
     @Override
     public void loop() {
-        if (time<3)
+        if (time<3.5) {
             auto_drive(-0.3, 5);
-        else if (time<5.1 && time>3)
+            rotate1.setPower(-0.3);
+        }
+        else if (time<5.5 && time>3.5) {
             topSpin.setPower(-0.7);
-        else if (time<10 && time > 5.5) {
-            auto_turn(-0.7,90);
+            rotate1.setPower(-0.5);
+        }
+        else if (time<6.2 && time > 5.5) {
+            auto_turn(-0.7,45);
 
-            topSpin.setPower(0);
-            auto_drive(0.6, 100);
 
 
+        }
+
+        else if (time<9 && time > 7)
+            rotate1.setPower(-0.8);
+
+        else if (time<15 && time > 10) {
+
+            auto_drive(0.5, 40);
         }
     //
        // else if (time<17 && time>10)
      //       auto_drive(0.5,25);
-        else;
+        else
+        {
+
+            auto_drive(0.0,0);
+            topSpin.setPower(0);
+            return;
+
+        }
     /*    switch (step) {
             case 0:         auto_drive(-0.3, 27);
                 step++;

@@ -333,8 +333,8 @@ public class BaseRobot extends OpMode {
 
     public void tank_drive(double leftPwr, double rightPwr) {
         rightPwr *= -1;                     // rightPwr is in reverse
-        double leftPower = Range.clip(leftPwr, -0.7, 0.7);
-        double rightPower = Range.clip(rightPwr, -0.7, 0.7);
+        double leftPower = Range.clip(leftPwr, -0.6, 0.6);
+        double rightPower = Range.clip(rightPwr, -0.6, 0.6);
         // Adjustment due to variation in physical motor power
         //   LF_Power = Range.clip(leftFrontPower * ConstantVariables.K_LF_ADJUST, -1.0, 1.0);
         //   RF_Power = Range.clip(rightBackPower * ConstantVariables.K_RB_ADJUST, -1.0, 1.0);

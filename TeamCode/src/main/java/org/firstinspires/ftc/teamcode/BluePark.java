@@ -26,11 +26,17 @@ public class BluePark extends BaseRobot{
 
     @Override
     public void loop() {
-        if (time<3.4) {
-            tank_drive(-0.5,-0.5);
+        if (time<1.4) {
+          //  tank_drive(-0.4,-0.4);
             //      auto_drive(-0.3, 5);
             //   rotate1.setPower(-0.3);
         }
+        else if (time>1.6 && time<2.9)
+        {
+           tank_drive(-0.1,-0.6);
+        }
+        else if (time>3.0 && time<5)
+            tank_drive(-0.5,-0.5);
         //else if (time<5.1 && time>3.0)
           //  auto_turn(-0.5,7);
         //else if (time>5.1 && time <5.5) {

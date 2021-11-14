@@ -26,11 +26,17 @@ public class RedPark extends BaseRobot{
 
     @Override
     public void loop() {
-        if (time<3.25) {
+        if (time<1.5) {
             tank_drive(-0.5,-0.5);
             //      auto_drive(-0.3, 5);
             //   rotate1.setPower(-0.3);
         }
+        else if (time>1.5 && time<2.5)
+        {
+            auto_turn(0.5,90);
+        }
+        else if (time>2.5 && time<5)
+            tank_drive(-0.5,-0.5);
         //else if (time<5.1 && time>3.0)
         //  auto_turn(-0.5,7);
         //else if (time>5.1 && time <5.5) {

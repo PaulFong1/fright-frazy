@@ -38,7 +38,7 @@ public class RedDuck extends BaseRobot {
 
         else if (time>5.3 && time <6.4)
         {
-            tank_drive(-0.2,-0.2);
+            tank_drive(-0.3,-0.3);
         }
         else if (time<7.4 && time > 6.4) {
             auto_turn(-0.4,12);

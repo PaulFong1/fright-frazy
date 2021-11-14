@@ -11,10 +11,14 @@ public class MainTeleOp extends BaseRobot {
     private int firstLevel = 0;
     private int secondLevel = 200;
     private int thirdLevel = 800;
+    private int rot1holdpos = 0;   // The target position for the rotate
+                                   // rotate1 may oscillate around this value
+                                   // Encoder values are not very accurate
   //  private boolean turned = false;
 
     @Override
     public void init() {
+
         super.init();
     }
 
@@ -38,7 +42,8 @@ public class MainTeleOp extends BaseRobot {
 
     @Override
     public void loop() {
-        telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+
+        telemetry.addData("rotate1:", "pos=%d, power=%.2f, zero=%s, tar=%d", rotate1.getCurrentPosition(), rotate1.getPower(), rotate1.getZeroPowerBehavior(), rotate1.getTargetPosition());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
@@ -59,10 +64,10 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPosition(0.3);
+            box_Spin.setPosition(0.4);
 
        if (gamepad1.right_bumper)
-            box_Spin.setPosition(-0.2);
+            box_Spin.setPosition(0.1);
 
 
 
@@ -142,26 +147,44 @@ public class MainTeleOp extends BaseRobot {
 
 
         if (gamepad1.dpad_up) {
-            rotate1.setPower(-0.8);
+// Don't know if RUN_TO_POSITION is better than BRAKE
+//            rotate1.setPower(-1);
+//            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 5;  // Each press move the rotate up 10 pos
+            rotate1.setTargetPosition(rot1holdpos);
+            rotate1.setPower(-1.0);                           // maximum power to move up and hold
+            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            while (rotate1.isBusy()) { }        // May cause loop problem
             //rotate2.setPower(0.1);
         }
-         else if (gamepad1.dpad_down){
-            rotate1.setPower(0.3);
-           // rotate2.setPower(0.5);
-            }
-        else if (get_rotate1_motor_enc()>=100)
-            rotate1.setPower(-0.3);
+         else if (gamepad1.dpad_down) {
+//            rotate1.setPower(0.3);
+//            rot1holdpos = rotate1.getCurrentPosition() + 1;
+            rot1holdpos += 5;
+            rotate1.setTargetPosition(rot1holdpos);
+            rotate1.setPower(0.5);
+            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            while (rotate1.isBusy()) { }
+            // rotate2.setPower(0.5);
 
-        else if (get_rotate1_motor_enc()>=200)
-            rotate1.setPower(-0.4);
+            // else if (get_rotate1_motor_enc()>=200)
+            //     rotate1.setPower(-0.4);
+            // else if (get_rotate1_motor_enc()>=100)
+            //      rotate1.setPower(-0.3);
+        }
+
         else {
-            rotate1.setPower(0.0);
+            rotate1.setTargetPosition(rot1holdpos);        // Try to stabilize
+            rotate1.setPower(-1.0);                        // Need maximize the hold the position
+            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            while (rotate1.isBusy()) { }
+        //    rotate1.setPower(0.0);
+            //     rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
          //  rotate2.setPower(0.0);
 
             //rotate2.setPower(0.05);
-            rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
        //     rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 

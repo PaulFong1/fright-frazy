@@ -22,7 +22,16 @@ public class MainTeleOp extends BaseRobot {
     public void start() {
         super.start();
        // axle_spin.resetDeviceConfigurationForOpMode();
+
+        rotate1.setTargetPosition(100);
+        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rotate1.setPower(0);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
+
 
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
@@ -50,10 +59,10 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPosition(0.5);
+            box_Spin.setPosition(0.3);
 
        if (gamepad1.right_bumper)
-            box_Spin.setPosition(0.0);
+            box_Spin.setPosition(-0.2);
 
 
 
@@ -133,17 +142,17 @@ public class MainTeleOp extends BaseRobot {
 
 
         if (gamepad1.dpad_up) {
-            rotate1.setPower(-0.9);
+            rotate1.setPower(-0.8);
             //rotate2.setPower(0.1);
         }
          else if (gamepad1.dpad_down){
             rotate1.setPower(0.3);
            // rotate2.setPower(0.5);
             }
-        else if (get_rotate1_motor_enc()>100)
+        else if (get_rotate1_motor_enc()>=100)
             rotate1.setPower(-0.3);
 
-        else if (get_rotate1_motor_enc()>200)
+        else if (get_rotate1_motor_enc()>=200)
             rotate1.setPower(-0.4);
         else {
             rotate1.setPower(0.0);

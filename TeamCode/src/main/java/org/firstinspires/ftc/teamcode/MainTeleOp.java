@@ -138,10 +138,10 @@ public class MainTeleOp extends BaseRobot {
 //
 //        } else linearSlide.setPower(0);
 
-        if (gamepad1.left_trigger > 0.5)
+        if (gamepad1.left_trigger > 0.4)
             topSpin.setPower(0.5);
 
-        else if (gamepad1.right_trigger>0.5)
+        else if (gamepad1.right_trigger>0.4)
             topSpin.setPower(-0.5);
         else topSpin.setPower(0);
 

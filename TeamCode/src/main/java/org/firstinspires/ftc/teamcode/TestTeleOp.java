@@ -25,8 +25,9 @@ public class TestTeleOp extends BaseRobot {
     @Override
     public void start() {
         super.start();
-        // axle_spin.resetDeviceConfigurationForOpMode();
 
+        // axle_spin.resetDeviceConfigurationForOpMode();
+/*
         rotate1.setTargetPosition(100);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -35,6 +36,8 @@ public class TestTeleOp extends BaseRobot {
 
 
 
+ */
+
 
 
         //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -42,7 +45,9 @@ public class TestTeleOp extends BaseRobot {
 
     @Override
     public void loop() {
-
+        tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+        if (gamepad1.right_bumper)
+            tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
         telemetry.addData("rotate1:", "pos=%d, power=%.2f, zero=%s, tar=%d", rotate1.getCurrentPosition(), rotate1.getPower(), rotate1.getZeroPowerBehavior(), rotate1.getTargetPosition());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();

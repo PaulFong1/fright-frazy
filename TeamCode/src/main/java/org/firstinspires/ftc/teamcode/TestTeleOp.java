@@ -53,8 +53,8 @@ public class TestTeleOp extends BaseRobot {
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
         //     reset_spin_encoders();
-        //        tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+        //tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+         tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
 
        /* tank_drive(gamepad2.left_stick_y, gamepad2.right_stick_y);

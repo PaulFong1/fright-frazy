@@ -261,7 +261,7 @@ public class BaseRobot extends OpMode {
 
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
-/*    public boolean auto_mecanum(double power, double inches) {
+   public boolean auto_mecanum(double power, double inches) {
         double TARGET_ENC = ConstantVariables.K_PPIN_DRIVE * inches;
         double leftFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double leftBackPower = Range.clip(0 + power, -1.0, 1.0);
@@ -284,7 +284,7 @@ public class BaseRobot extends OpMode {
             return false;
         }
     }
- */
+
 
     public void tankanum_original(double rightPwr, double leftPwr, double lateralpwr) {
         rightPwr *= -1;

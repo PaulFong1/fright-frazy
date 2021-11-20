@@ -49,7 +49,7 @@ public class TestTeleOp extends BaseRobot {
         //    reset_rotate_encoders();
         //     reset_spin_encoders();
         //tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-         tankanum_original(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
+         tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
 
        /* tank_drive(gamepad2.left_stick_y, gamepad2.right_stick_y);
@@ -161,12 +161,11 @@ public class TestTeleOp extends BaseRobot {
 
 
 
-
         if (gamepad1.dpad_up) {
 // Don't know if RUN_TO_POSITION is better than BRAKE
 //            rotate1.setPower(-1);
 //            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
-            rot1holdpos -= 60;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 7;  // Each press move the rotate up 10 pos
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(-1.0);                           // maximum power to move up and hold
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -176,7 +175,7 @@ public class TestTeleOp extends BaseRobot {
         else if (gamepad1.dpad_down) {
 //            rotate1.setPower(0.3);
 //            rot1holdpos = rotate1.getCurrentPosition() + 1;
-            rot1holdpos += 15;
+            rot1holdpos += 5;
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(0.5);
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -193,8 +192,19 @@ public class TestTeleOp extends BaseRobot {
             rotate1.setTargetPosition(rot1holdpos);        // Try to stabilize
             rotate1.setPower(-1.0);                        // Need maximize the hold the position
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            while (rotate1.isBusy()) { }
+            //    rotate1.setPower(0.0);
+            //     rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+            //  rotate2.setPower(0.0);
+
+            //rotate2.setPower(0.05);
+            //     rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         }
+
 
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();

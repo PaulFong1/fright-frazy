@@ -150,7 +150,7 @@ public class MainTeleOp extends BaseRobot {
 // Don't know if RUN_TO_POSITION is better than BRAKE
 //            rotate1.setPower(-1);
 //            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
-            rot1holdpos -= 40;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 7;  // Each press move the rotate up 10 pos
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(-1.0);                           // maximum power to move up and hold
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -160,7 +160,7 @@ public class MainTeleOp extends BaseRobot {
          else if (gamepad1.dpad_down) {
 //            rotate1.setPower(0.3);
 //            rot1holdpos = rotate1.getCurrentPosition() + 1;
-            rot1holdpos += 15;
+            rot1holdpos += 5;
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(0.5);
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);

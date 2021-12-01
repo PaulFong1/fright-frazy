@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="RedDuckTest", group="Simple")
+@Autonomous(name="RedDuckAutoTest", group="Simple")
 //@Disabled
-public class RedDuck extends BaseRobot {
+public class RedDuckAuto extends BaseRobot {
     private int step = 0;
 
     @Override
@@ -25,67 +25,23 @@ public class RedDuck extends BaseRobot {
     }
 
     @Override
-    public void loop() {
-        if (time<2.25) {
-            tank_drive(0.3,0.3);
-      //      auto_drive(-0.3, 5);
-         //   rotate1.setPower(-0.3);
-        }
-        else if (time<5.2 && time>3.0) {
-            topSpin.setPower(-0.5);
-          //  rotate1.setPower(-0.5);
-        }
+    public void loop()
+    {
 
-        else if (time>5.3 && time <6.4)
+        auto_drive(-0.5, 20);
+        if (time>5 && time<10)
         {
-            tank_drive(-0.3,-0.3);
+            topSpin.setPower(0.5);
         }
-        else if (time<7.4 && time > 6.4) {
-            auto_turn(-0.4,12);
+        topSpin.setPower(0.0);
+        auto_drive(0.5, 100);
 
 
 
-        }
 
-      // else if (time<8.4 && time > 7.4){}
-//            rotate1.setPower(-0.8);
 
-        else if (time<13 && time > 9.5) {
-
-            tank_drive(-0.5,-0.5);
-        }
-    //
-       // else if (time<17 && time>10)
-     //       auto_drive(0.5,25);
-        else
+        if (DEBUG)
         {
-
-            tank_drive(0,0);
-           // topSpin.setPower(0);
-            return;
-
-        }
-    /*    switch (step) {
-            case 0:         auto_drive(-0.3, 27);
-                step++;
-                break;
-            case 1: if (time<120)
-                topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
-                step++;
-                break;
-            case 2:   topSpin.setPower(0);
-                auto_turn(-0.3, 180);
-                step++;
-                break;
-           case 3:      //  auto_drive(0.5, 60);
-            //    step++;
-                break;
-
-            default: break;
-        }
-
-     */
-        if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());
@@ -95,4 +51,8 @@ public class RedDuck extends BaseRobot {
             telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
         }
     }
-}
+
+
+
+    }
+

@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="RedDuckTest", group="Simple")
+@Autonomous(name="BlueParkAutoTest", group="Simple")
 //@Disabled
-public class RedDuck extends BaseRobot {
+public class BlueParkAuto extends BaseRobot{
     private int step = 0;
 
     @Override
@@ -26,45 +26,9 @@ public class RedDuck extends BaseRobot {
 
     @Override
     public void loop() {
-        if (time<2.25) {
-            tank_drive(0.3,0.3);
-      //      auto_drive(-0.3, 5);
-         //   rotate1.setPower(-0.3);
-        }
-        else if (time<5.2 && time>3.0) {
-            topSpin.setPower(-0.5);
-          //  rotate1.setPower(-0.5);
-        }
-
-        else if (time>5.3 && time <6.4)
-        {
-            tank_drive(-0.3,-0.3);
-        }
-        else if (time<7.4 && time > 6.4) {
-            auto_turn(-0.4,12);
-
-
-
-        }
-
-      // else if (time<8.4 && time > 7.4){}
-//            rotate1.setPower(-0.8);
-
-        else if (time<13 && time > 9.5) {
-
-            tank_drive(-0.5,-0.5);
-        }
-    //
-       // else if (time<17 && time>10)
-     //       auto_drive(0.5,25);
-        else
-        {
-
-            tank_drive(0,0);
-           // topSpin.setPower(0);
-            return;
-
-        }
+        auto_drive(0.5, 20);
+        auto_turn(0.5, 90);
+        auto_drive(0.5,20);
     /*    switch (step) {
             case 0:         auto_drive(-0.3, 27);
                 step++;

@@ -4,9 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 // Created for 16887.
-@TeleOp(name = "Main TeleOp", group = "TeleOp")
+@TeleOp(name = "TwoDriversTeleOp", group = "TeleOp")
 //@Disabled
-public class MainTeleOp extends BaseRobot {
+public class TwoDriversTeleOp extends BaseRobot {
     private int stage = 0;
     private int firstLevel = 0;
     private int secondLevel = 200;
@@ -52,7 +52,7 @@ public class MainTeleOp extends BaseRobot {
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         //tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_original(-0.9*gamepad1.right_stick_y, -0.9*gamepad1.left_stick_y, -0.9*gamepad1.right_stick_x);
+        tankanum_original(-1*gamepad1.right_stick_y, -1*gamepad1.left_stick_y, -1*gamepad1.right_stick_x);
       //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -64,18 +64,18 @@ public class MainTeleOp extends BaseRobot {
 
         //     }
 
-        if (gamepad1.left_bumper)
-            box_Spin.setPosition(0.7);
+        if (gamepad2.left_bumper)
+            box_Spin.setPosition(0.4);
 
-       if (gamepad1.right_bumper)
+       if (gamepad2.right_bumper)
             box_Spin.setPosition(0.1);
 
 
 
 
-       if (gamepad1.a)
+       if (gamepad2.a)
             axle_Spin.setPower(1.0);
-       else if (gamepad1.b)
+       else if (gamepad2.b)
             axle_Spin.setPower(-1.0);
        else
             axle_Spin.setPower(0);
@@ -89,17 +89,17 @@ public class MainTeleOp extends BaseRobot {
 //        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
-        if (gamepad1.x && stage < 2) {
+        if (gamepad2.x && stage < 2) {
             linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
             stage++;
         }
 
-        else if (gamepad1.y && stage > 0) {
+        else if (gamepad2.y && stage > 0) {
             linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
             stage--;
         }
 
-        else if (gamepad1.dpad_right) {
+        else if (gamepad2.dpad_right) {
             linearSlide.setPower(0.7);
             if (linearSlide.getCurrentPosition() >= secondLevel) {
                 stage = 1;
@@ -109,7 +109,7 @@ public class MainTeleOp extends BaseRobot {
             }
         }
 
-        else if (gamepad1.dpad_left) {
+        else if (gamepad2.dpad_left) {
             linearSlide.setPower(-0.1);
             if (linearSlide.getCurrentPosition() <= secondLevel) {
                 stage = 1;
@@ -139,28 +139,26 @@ public class MainTeleOp extends BaseRobot {
 //
 //        } else linearSlide.setPower(0);
 
-        if (gamepad1.left_trigger > 0.4)
+        if (gamepad1.left_bumper)
             topSpin.setPower(0.5);
 
-        else if (gamepad1.right_trigger > 0.4)
+        else if (gamepad1.right_bumper)
             topSpin.setPower(-0.5);
         else topSpin.setPower(0);
 
 
-
-
-        if (gamepad1.dpad_up) {
+        if (gamepad2.dpad_up) {
 // Don't know if RUN_TO_POSITION is better than BRAKE
 //            rotate1.setPower(-1);
 //            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
-            rot1holdpos -= 75;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 100;  // Each press move the rotate up 10 pos
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(-1.0);                           // maximum power to move up and hold
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (rotate1.isBusy()) { }        // May cause loop problem
             //rotate2.setPower(0.1);
         }
-         else if (gamepad1.dpad_down) {
+         else if (gamepad2.dpad_down) {
 //            rotate1.setPower(0.3);
 //            rot1holdpos = rotate1.getCurrentPosition() + 1;
             rot1holdpos += 5;

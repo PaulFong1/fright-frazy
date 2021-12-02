@@ -30,12 +30,12 @@ public class RedParkAuto extends BaseRobot{
 
     @Override
     public void loop() {
-        if (time<5)
-            auto_mecanum(0.5, 20);
+        if (time<3)
+            auto_mecanum(0.5, 5);
 
 
-        if (time>5 && time<10)
-            tank_drive(0.5, 0.5);
+        if (time>3 && time<6)
+            auto_drive(0.2, 0.2);
 
         super.start();
 

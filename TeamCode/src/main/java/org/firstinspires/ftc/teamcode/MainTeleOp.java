@@ -52,7 +52,7 @@ public class MainTeleOp extends BaseRobot {
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         //tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_original(-1*gamepad1.right_stick_y, -1*gamepad1.left_stick_y, -1*gamepad1.right_stick_x);
+        tankanum_original(-0.9*gamepad1.right_stick_y, -0.9*gamepad1.left_stick_y, -0.9*gamepad1.right_stick_x);
       //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -65,7 +65,7 @@ public class MainTeleOp extends BaseRobot {
         //     }
 
         if (gamepad1.left_bumper)
-            box_Spin.setPosition(0.4);
+            box_Spin.setPosition(0.7);
 
        if (gamepad1.right_bumper)
             box_Spin.setPosition(0.1);
@@ -147,11 +147,13 @@ public class MainTeleOp extends BaseRobot {
         else topSpin.setPower(0);
 
 
+
+
         if (gamepad1.dpad_up) {
 // Don't know if RUN_TO_POSITION is better than BRAKE
 //            rotate1.setPower(-1);
 //            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
-            rot1holdpos -= 7;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 75;  // Each press move the rotate up 10 pos
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(-1.0);                           // maximum power to move up and hold
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);

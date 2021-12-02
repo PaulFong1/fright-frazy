@@ -43,7 +43,7 @@ public class MainTeleOp extends BaseRobot {
     @Override
     public void loop() {
 
-        telemetry.addData("rotate1:", "pos=%d, power=%.2f, zero=%s, tar=%d", rotate1.getCurrentPosition(), rotate1.getPower(), rotate1.getZeroPowerBehavior(), rotate1.getTargetPosition());
+        telemetry.addData("axleSpin:", "power=%.2f",  axle_Spin.getPower());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
@@ -67,7 +67,7 @@ public class MainTeleOp extends BaseRobot {
         if (gamepad1.left_bumper)
             box_Spin.setPosition(0.7);
 
-       if (gamepad1.right_bumper)
+       else if (gamepad1.right_bumper)
             box_Spin.setPosition(0.1);
 
 
@@ -139,10 +139,10 @@ public class MainTeleOp extends BaseRobot {
 //
 //        } else linearSlide.setPower(0);
 
-        if (gamepad1.left_trigger > 0.4)
+        if (gamepad1.left_trigger > 0.1)
             topSpin.setPower(0.5);
 
-        else if (gamepad1.right_trigger > 0.4)
+        else if (gamepad1.right_trigger > 0.1)
             topSpin.setPower(-0.5);
         else topSpin.setPower(0);
 
@@ -178,7 +178,7 @@ public class MainTeleOp extends BaseRobot {
 
         else {
             rotate1.setTargetPosition(rot1holdpos);        // Try to stabilize
-            rotate1.setPower(-1.0);                        // Need maximize the hold the position
+            //rotate1.setPower(-1.0);                        // Need maximize the hold the position
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //            while (rotate1.isBusy()) { }
         //    rotate1.setPower(0.0);

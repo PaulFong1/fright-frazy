@@ -23,6 +23,42 @@ public class BlueDuck extends BaseRobot {
 
     @Override
     public void loop() {
+        switch (step) {
+            case 0:
+                auto_mecanum(-0.3, 10);
+                step++;
+                break;
+            case 1:
+                try {
+                    topSpin.setPower(0.7);
+
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                step++;
+                break;
+            case 2:
+                topSpin.setPower(0);
+                auto_mecanum(-0.3, 50);
+                step++;
+                break;
+            case 3:
+                auto_drive(-0.5, 5);
+                step++;
+                break;
+            case 4:
+                auto_mecanum(-0.5, 25);
+                // step++;
+                break;
+
+            default: break;
+        }
+        /*
         if (time<1)
         {
             auto_turn(0.5,-10);
@@ -58,6 +94,7 @@ public class BlueDuck extends BaseRobot {
 
         }
 
+         */
        // else if (time<8 && time > 7)
          //   rotate1.setPower(-0.8);
 /*
@@ -77,7 +114,7 @@ public class BlueDuck extends BaseRobot {
         // else if (time<17 && time>10)
         //       auto_drive(0.5,25);
 
- */
+
         else
         {
 
@@ -86,6 +123,8 @@ public class BlueDuck extends BaseRobot {
             return;
 
         }
+
+ */
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

@@ -26,6 +26,8 @@ public class BluePark extends BaseRobot{
 
     @Override
     public void loop() {
+        auto_mecanum(-0.5,100);
+        /*
         if (time<1.4) {
           //  tank_drive(-0.4,-0.4);
             //      auto_drive(-0.3, 5);
@@ -76,6 +78,7 @@ public class BluePark extends BaseRobot{
         }
 
      */
+
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

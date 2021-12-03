@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="RedParkTest", group="Simple")
+@Autonomous(name="RedBlockPark", group="Simple")
 //@Disabled
 public class RedPark extends BaseRobot{
     private int step = 0;
@@ -26,6 +26,35 @@ public class RedPark extends BaseRobot{
 
     @Override
     public void loop() {
+        switch (step) {
+            case 1:
+                auto_drive(0.5, 25);
+                step++;
+                break;
+            case 2:
+                auto_mecanum(-0.5, 5);
+                step++;
+                break;
+            case 3:
+                try {
+                    axle_Spin.setPower(0.7);
+
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            case 4:
+                auto_drive(-0.5,45);
+                step++;
+                break;
+            case 5:
+                auto_mecanum(0.5,45);
+                break;
+            default: break;
+        }
+     //   auto_mecanum(0.5,100);
+       /*
         if (time<1.5) {
             tank_drive(-0.5,-0.5);
             //      auto_drive(-0.3, 5);
@@ -56,6 +85,8 @@ public class RedPark extends BaseRobot{
             return;
 
         }
+
+        */
     /*    switch (step) {
             case 0:         auto_drive(-0.3, 27);
                 step++;

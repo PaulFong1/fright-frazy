@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 // Created  for 16887.
-@Autonomous(name="RedDuckTest", group="Simple")
+@Autonomous(name="RedDuckBlock", group="Simple")
 //@Disabled
 public class RedDuck extends BaseRobot {
     private int step = 0;
@@ -26,6 +26,7 @@ public class RedDuck extends BaseRobot {
 
     @Override
     public void loop() {
+        /*
         if (time<2.25) {
             tank_drive(0.3,0.3);
       //      auto_drive(-0.3, 5);
@@ -65,26 +66,62 @@ public class RedDuck extends BaseRobot {
             return;
 
         }
-    /*    switch (step) {
-            case 0:         auto_drive(-0.3, 27);
+
+         */
+        switch (step) {
+            case 0:
+                auto_mecanum(-0.3, 10);
                 step++;
                 break;
-            case 1: if (time<120)
-                topSpin.setPower(0.7);   //   auto_drive(-0.3, 12);
+            case 1:
+                try {
+                    topSpin.setPower(0.7);
+
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
                 step++;
                 break;
-            case 2:   topSpin.setPower(0);
-                auto_turn(-0.3, 180);
+            case 2:
+                topSpin.setPower(0);
+                auto_mecanum(-0.3, 30);
                 step++;
                 break;
-           case 3:      //  auto_drive(0.5, 60);
-            //    step++;
+           case 3:
+                 auto_drive(0.5, 5);
+                step++;
+                break;
+            case 4:
+                try {
+                    axle_Spin.setPower(0.7);
+
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                step++;
+                break;
+            case 5:
+                axle_Spin.setPower(0);
+                auto_drive(-0.5,5);
+                step++;
+                break;
+            case 6:
+                auto_mecanum(-0.5, 25);
+               // step++;
                 break;
 
             default: break;
         }
 
-     */
+
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

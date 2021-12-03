@@ -320,7 +320,7 @@ public class BaseRobot extends OpMode {
             rightFrontPower = -lateralpwr;
             rightBackPower = lateralpwr;
         }
-// to adjust the power among the motors so that they have almost equal ACTUAL PHYSICAL powers
+// to adjust the powe r among the motors so that they have almost equal ACTUAL PHYSICAL powers
         leftFrontPower = Range.clip(leftFrontPower * ConstantVariables.K_LF_ADJUST, -1.0, 1.0);
         leftBackPower = Range.clip(leftBackPower * ConstantVariables.K_LB_ADJUST, -1.0, 1.0);
         rightFrontPower = Range.clip(rightFrontPower * ConstantVariables.K_RF_ADJUST, -1.0, 1.0);

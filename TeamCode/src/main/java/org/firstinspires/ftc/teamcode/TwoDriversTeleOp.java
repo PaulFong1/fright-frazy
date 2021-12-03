@@ -52,7 +52,13 @@ public class TwoDriversTeleOp extends BaseRobot {
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         //tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_original(-1*gamepad1.right_stick_y, -1*gamepad1.left_stick_y, -1*gamepad1.right_stick_x);
+        if (gamepad1.right_bumper) {
+            tankanum_original(-1 * gamepad1.right_stick_y, -1 * gamepad1.left_stick_y, -1 * gamepad1.right_stick_x);
+        }
+        else
+        {
+            tankanum_original(-0.75 * gamepad1.right_stick_y, -0.75 * gamepad1.left_stick_y, -0.75 * gamepad1.right_stick_x);
+        }
       //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -67,7 +73,7 @@ public class TwoDriversTeleOp extends BaseRobot {
         if (gamepad2.left_bumper)
             box_Spin.setPosition(0.4);
 
-       if (gamepad2.right_bumper)
+       else if (gamepad2.right_bumper)
             box_Spin.setPosition(0.1);
 
 
@@ -89,7 +95,7 @@ public class TwoDriversTeleOp extends BaseRobot {
 //        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
-        if (gamepad2.x && stage < 2) {
+        /*if (gamepad2.x && stage < 2) {
             linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
             stage++;
         }
@@ -98,25 +104,15 @@ public class TwoDriversTeleOp extends BaseRobot {
             linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
             stage--;
         }
+            */
+        if (gamepad2.dpad_right) {
+            linearSlide.setPower(0.5);
 
-        else if (gamepad2.dpad_right) {
-            linearSlide.setPower(0.7);
-            if (linearSlide.getCurrentPosition() >= secondLevel) {
-                stage = 1;
-            }
-            if (linearSlide.getCurrentPosition() >= thirdLevel) {
-                stage = 2;
-            }
         }
 
         else if (gamepad2.dpad_left) {
-            linearSlide.setPower(-0.1);
-            if (linearSlide.getCurrentPosition() <= secondLevel) {
-                stage = 1;
-            }
-            if (linearSlide.getCurrentPosition() <= firstLevel) {
-                stage = 0;
-            }
+            linearSlide.setPower(-0.5);
+
         } else linearSlide.setPower(0);
 
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

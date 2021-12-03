@@ -77,12 +77,13 @@ public class RedDuck extends BaseRobot {
                 try {
                     topSpin.setPower(0.7);
 
-                    Thread.sleep(100);
+                  //  Thread.sleep(100);
+                    wait(3000);
                 }
                 catch (InterruptedException e) {
             e.printStackTrace();
+            telemetry.addData("error","=%");
         }
-
 
 
                 step++;
@@ -123,6 +124,7 @@ public class RedDuck extends BaseRobot {
 
 
         if (DEBUG) {
+            telemetry.addData("step", "=%d",step);
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());

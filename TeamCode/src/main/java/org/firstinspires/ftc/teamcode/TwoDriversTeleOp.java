@@ -153,6 +153,8 @@ public class TwoDriversTeleOp extends BaseRobot {
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (rotate1.isBusy()) { }        // May cause loop problem
             //rotate2.setPower(0.1);
+
+       //     rotate1.setPower(-1.0);
         }
          else if (gamepad2.dpad_down) {
 //            rotate1.setPower(0.3);
@@ -163,7 +165,7 @@ public class TwoDriversTeleOp extends BaseRobot {
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //            while (rotate1.isBusy()) { }
             // rotate2.setPower(0.5);
-
+//rotate1.setPower(1.0);
             // else if (get_rotate1_motor_enc()>=200)
             //     rotate1.setPower(-0.4);
             // else if (get_rotate1_motor_enc()>=100)
@@ -172,8 +174,10 @@ public class TwoDriversTeleOp extends BaseRobot {
 
         else {
             rotate1.setTargetPosition(rot1holdpos);        // Try to stabilize
-            rotate1.setPower(-1.0);                        // Need maximize the hold the position
+           rotate1.setPower(-1.0);                        // Need maximize the hold the position
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //    rotate1.setPower(0);
+            rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //            while (rotate1.isBusy()) { }
         //    rotate1.setPower(0.0);
             //     rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

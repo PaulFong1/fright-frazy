@@ -39,7 +39,8 @@ public class RedPark extends BaseRobot{
                 try {
                     axle_Spin.setPower(0.7);
 
-                    Thread.sleep(100);
+                  //  Thread.sleep(100);
+                    wait(3000);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
@@ -50,11 +51,16 @@ public class RedPark extends BaseRobot{
                 break;
             case 5:
                 auto_mecanum(0.5,45);
+
+
                 break;
             default: break;
         }
      //   auto_mecanum(0.5,100);
        /*
+            wait(3000);
+                sleep(3000);
+
         if (time<1.5) {
             tank_drive(-0.5,-0.5);
             //      auto_drive(-0.3, 5);

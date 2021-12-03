@@ -126,6 +126,8 @@ public class BlueDuck extends BaseRobot {
 
  */
         if (DEBUG) {
+            telemetry.addData("step", "=%d",step);
+
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());
             telemetry.addData("Front power: ", "Left=%.2f, Right=%.2f", leftFront.getPower(), rightFront.getPower());

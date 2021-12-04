@@ -151,7 +151,7 @@ public class TwoDriversTeleOp extends BaseRobot {
 // Don't know if RUN_TO_POSITION is better than BRAKE
 //            rotate1.setPower(-1);
 //            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
-            rot1holdpos -= 100;  // Each press move the rotate up 10 pos
+            rot1holdpos -= 250;  // Each press move the rotate up 10 pos
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(-1.0);                           // maximum power to move up and hold
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);

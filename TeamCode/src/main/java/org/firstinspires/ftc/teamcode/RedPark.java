@@ -20,8 +20,6 @@ public class RedPark extends BaseRobot{
     @Override
     public void start() {
         super.start();
-//        lift1.setPower(0.0);            // Don't need LIFT for this mode
-//        lift1.setTargetPosition(0);
     }
 
     @Override
@@ -40,12 +38,11 @@ public class RedPark extends BaseRobot{
                 step++;
                 break;
             case 4:
-                auto_drive(-0.5,45);
+                auto_drive(-0.5,25);
                 step++;
                 break;
             case 5:
-                auto_mecanum(0.5,45);
-
+                auto_mecanum(0.5,35);
 
                 break;
             default: break;

@@ -163,7 +163,7 @@ public class TwoDriversTeleOp extends BaseRobot {
          else if (gamepad2.dpad_down) {
 //            rotate1.setPower(0.3);
 //            rot1holdpos = rotate1.getCurrentPosition() + 1;
-            rot1holdpos += 5;
+            rot1holdpos += 25;
             rotate1.setTargetPosition(rot1holdpos);
             rotate1.setPower(0.7);
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);

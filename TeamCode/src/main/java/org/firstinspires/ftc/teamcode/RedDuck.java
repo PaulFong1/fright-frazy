@@ -109,7 +109,7 @@ public class RedDuck extends BaseRobot {
                 step++;
                 break;
             case 8:
-                auto_turn(0.3,20);
+                auto_turn(0.3,10);
                 step++;
                 break;
             case 9:

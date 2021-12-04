@@ -36,15 +36,9 @@ public class RedPark extends BaseRobot{
                 step++;
                 break;
             case 3:
-                try {
-                    axle_Spin.setPower(0.7);
-
-                  //  Thread.sleep(100);
-                    wait(3000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                auto_spin(axle_Spin,-1.0,2000);
+                step++;
+                break;
             case 4:
                 auto_drive(-0.5,45);
                 step++;

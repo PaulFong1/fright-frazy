@@ -231,10 +231,10 @@ public class BaseRobot extends OpMode {
 //        double TARGET_ENC = Math.abs(ConstantVariables.K_PPDEG_DRIVE * degrees * 1.0);  // degrees to turns
         double speed = Range.clip(power, -1, 1);
 //        if (DEBUG) telemetry.addData("AUTO_TU:", "Curr=%d, Tar=%d", CURR_ENC, TARGET_ENC);
-        leftFront.setPower(speed);
-        leftBack.setPower(-speed);          // Back is the opposite of Front
-        rightFront.setPower(speed);         // Right is the same direction of Left which means turns in opposite direction
-        rightBack.setPower(-speed);         // Back is the opposite of Front
+        leftFront.setPower(-speed);
+        leftBack.setPower(speed);          // Back is the opposite of Front
+        rightFront.setPower(-speed);         // Right is the same direction of Left which means turns in opposite direction
+        rightBack.setPower(speed);         // Back is the opposite of Front
         // Right front motor is running in opposite direction
         if (power < 0) {                    // Turning left -> right pos is decreasing
             TARGET_ENC = -(int) (ConstantVariables.K_PPDEG_DRIVE * degrees * 1.2 + 0.5);  // degrees to turns NEGATIVE
@@ -262,20 +262,28 @@ public class BaseRobot extends OpMode {
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
    public boolean auto_mecanum(double power, double inches) {
-       rightFront.setDirection(DcMotor.Direction.REVERSE);
-       leftFront.setDirection(DcMotor.Direction.REVERSE);
+  //1     rightFront.setDirection(DcMotor.Direction.REVERSE);
+  //1     leftFront.setDirection(DcMotor.Direction.REVERSE);
         double TARGET_ENC = ConstantVariables.K_PPIN_DRIVE * inches;
+   /*
         double leftFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double leftBackPower = Range.clip(0 + power, -1.0, 1.0);
         double rightFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double rightBackPower = Range.clip(0 + power, -1.0, 1.0);
-
-        leftFront.setPower(leftFrontPower);
-        leftBack.setPower(leftBackPower);
-        rightFront.setPower(rightFrontPower);
-        rightBack.setPower(rightBackPower);
+*/
+       double speed = Range.clip(power, -1, 1);
+        leftFront.setPower(-speed);
+        leftBack.setPower(speed);
+        rightFront.setPower(-speed);
+        rightBack.setPower(speed);
         if (DEBUG) telemetry.addData("MEC - Target_enc: ", "%.2f", TARGET_ENC);
 
+       /*
+        telemetry.addData("lf","=%.2f",leftFrontPower);
+       telemetry.addData("rf","=%.2f",leftFrontPower);
+       telemetry.addData("lb","=%.2f",leftFrontPower);
+       telemetry.addData("rb","=%.2f",leftFrontPower);
+       */
         if (Math.abs(get_rightFront_motor_enc()) >= TARGET_ENC) {
             leftFront.setPower(0);
             leftBack.setPower(0);
@@ -368,6 +376,17 @@ public class BaseRobot extends OpMode {
         motor.setPower(0);
         return;
     }
+    public void auto_spin(CRServo servo, double power, int time) {
+        try {
+            servo.setPower(power);
+
+            //  Thread.sleep(100);
+            wait(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     // alpha is light intensity
 //    public boolean is_black(int alpha, int red, int blue) { return ((alpha > 350) && (blue > red*(3.0/4.0))); }
 //    public boolean is_yellow(int alpha, int red, int green, int blue) { return ((alpha > 350) && (red > 2*blue) && (green > 2*blue)); }

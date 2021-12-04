@@ -89,18 +89,18 @@ public class TwoDriversTeleOp extends BaseRobot {
 //        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
-        if (gamepad2.x && stage < 2) {
-            linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
-            stage++;
-        }
+       // if (gamepad2.x && stage < 2) {
+         //   linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
+           // stage++;
+        //}
 
-        else if (gamepad2.y && stage > 0) {
-            linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
-            stage--;
-        }
+        //else if (gamepad2.y && stage > 0) {
+          //  linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
+           // stage--;
+        //}
 
-        else if (gamepad2.dpad_right) {
-            linearSlide.setPower(0.7);
+         if (gamepad2.dpad_right) {
+            linearSlide.setPower(0.85);
             if (linearSlide.getCurrentPosition() >= secondLevel) {
                 stage = 1;
             }
@@ -110,7 +110,7 @@ public class TwoDriversTeleOp extends BaseRobot {
         }
 
         else if (gamepad2.dpad_left) {
-            linearSlide.setPower(-0.1);
+            linearSlide.setPower(-0.4);
             if (linearSlide.getCurrentPosition() <= secondLevel) {
                 stage = 1;
             }
@@ -165,7 +165,7 @@ public class TwoDriversTeleOp extends BaseRobot {
 //            rot1holdpos = rotate1.getCurrentPosition() + 1;
             rot1holdpos += 5;
             rotate1.setTargetPosition(rot1holdpos);
-            rotate1.setPower(0.5);
+            rotate1.setPower(0.7);
             rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //            while (rotate1.isBusy()) { }
             // rotate2.setPower(0.5);

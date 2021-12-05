@@ -92,13 +92,7 @@ public class RedDuck extends BaseRobot {
                // if (time<10)
                 topSpin.setPower(-0.7);
                 auto_drive(-0.1, 7);
-               // while (time<3) {
 
-                 //   telemetry.addData("power", "=%.2f", topSpin.getPower());
-               // }
-           //     else
-             //   topSpin.setPower(0);
-            //telemetry.addData("error","=%");
 
                 step++;
                 break;
@@ -110,7 +104,7 @@ public class RedDuck extends BaseRobot {
                 break;
 
             case 6:
-                auto_turn(0.5,45);
+                auto_turn(0.5,10);
                 step++;
                 break;
             case 7:

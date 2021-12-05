@@ -19,7 +19,8 @@ public class AutoTest extends BaseRobot {
     }
     @Override
     public void loop() {
-    auto_mecanum(0.7,20);
+   axle_Spin.setPower(0.7);
+        // auto_mecanum(0.7,20);
    //     auto_drive(0.7,50);
      //   if (time<10)
       //      axle_Spin.setPower(-0.7);

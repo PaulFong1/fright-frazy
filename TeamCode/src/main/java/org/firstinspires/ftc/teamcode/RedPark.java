@@ -26,7 +26,7 @@ public class RedPark extends BaseRobot{
     public void loop() {
         switch (step) {
             case 1:
-                auto_drive(0.5, 25);
+                auto_drive(0.5, 30);
                 step++;
                 break;
             case 2:
@@ -35,7 +35,7 @@ public class RedPark extends BaseRobot{
                 break;
             case 3:
                 axle_Spin.setPower(-0.7);
-                auto_drive(0.1,6);
+                auto_drive(0.1,7);
             //    auto_spin(axle_Spin,-1.0,2);
                 step++;
                 break;
@@ -61,7 +61,7 @@ public class RedPark extends BaseRobot{
                 break;
 
             case 8:
-                auto_drive(-0.5, 20);
+                auto_drive(-0.5, 40);
                 step++;
                 break;
 

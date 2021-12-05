@@ -28,7 +28,7 @@ public class BluePark extends BaseRobot{
     public void loop() {
         switch (step) {
             case 1:
-                auto_drive(0.5, 25);
+                auto_drive(0.5, 30);
                 step++;
                 break;
             case 2:
@@ -36,25 +36,29 @@ public class BluePark extends BaseRobot{
                 step++;
                 break;
             case 3:
-                axle_Spin.setPower(-0.7);
-                auto_drive(0.1,6);
-                //    auto_spin(axle_Spin,-1.0,2);
+                auto_drive(0.5,5);
                 step++;
                 break;
             case 4:
+                axle_Spin.setPower(-0.7);
+                auto_drive(0.1,9);
+
+                step++;
+                break;
+            case 5:
                 axle_Spin.setPower(0);
                 auto_turn(0.5, 45);
                 step++;
                 break;
-            case 5:
-                auto_turn(-0.5,90);
+            case 6:
+                auto_turn(-0.5,95);//-
                 step++;
 
                 break;
 
-            case 6:
-                auto_drive(-0.5, 20);
-                step++;
+            case 7:
+                auto_drive(-0.5, 30);//-
+                //step++;
                 break;
 
 

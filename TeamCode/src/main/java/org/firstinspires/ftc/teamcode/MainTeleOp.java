@@ -74,17 +74,14 @@ public class MainTeleOp extends BaseRobot {
 
 
 
-       if (gamepad1.a)
-            axle_Spin.setPower(1.0);
+       if (gamepad1.a) {
+           axle_Spin.setPower(1.0);
+           box_Spin.setPosition(0.4);
+       }
        else if (gamepad1.b)
             axle_Spin.setPower(-1.0);
        else
             axle_Spin.setPower(0);
-
-
-        if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
-        else if (get_linearSlide_motor_enc() < thirdLevel - 100) stage = 1;
-        else stage = 2;
 
 //        telemetry.addData("lift enc: ", "=%.2f", linearSlide.getCurrentPosition());
 //        telemetry.addData("stage: ", "=%d",stage);

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 @Autonomous(name="BlueParkTest", group="Simple")
 //@Disabled
 public class BluePark extends BaseRobot{
-    private int step = 0;
+    private int step = 1;
 
     @Override
     public void init() {
@@ -32,29 +32,34 @@ public class BluePark extends BaseRobot{
                 step++;
                 break;
             case 2:
-                auto_mecanum(-0.5, 5);
+                auto_turn(-0.5, 45);
                 step++;
                 break;
             case 3:
-                try {
-                    axle_Spin.setPower(0.7);
-
-                    //  Thread.sleep(100);
-                    wait(3000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                axle_Spin.setPower(-0.7);
+                auto_drive(0.1,6);
+                //    auto_spin(axle_Spin,-1.0,2);
+                step++;
+                break;
             case 4:
-                auto_drive(-0.5,45);
+                axle_Spin.setPower(0);
+                auto_turn(0.5, 45);
                 step++;
                 break;
             case 5:
-                auto_mecanum(0.5,45);
-
+                auto_turn(-0.5,90);
+                step++;
 
                 break;
+
+            case 6:
+                auto_drive(-0.5, 20);
+                step++;
+                break;
+
+
             default: break;
+
         }
       //  auto_mecanum(-0.5,100);
         /*

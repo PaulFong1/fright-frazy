@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 @Autonomous(name="RedBlockPark", group="Simple")
 //@Disabled
 public class RedPark extends BaseRobot{
-    private int step = 0;
+    private int step = 1;
 
     @Override
     public void init() {
@@ -30,22 +30,42 @@ public class RedPark extends BaseRobot{
                 step++;
                 break;
             case 2:
-                auto_mecanum(-0.5, 5);
+                auto_turn(0.5, 45);
                 step++;
                 break;
             case 3:
                 axle_Spin.setPower(-0.7);
+                auto_drive(0.1,6);
             //    auto_spin(axle_Spin,-1.0,2);
                 step++;
                 break;
             case 4:
-                auto_drive(-0.5,25);
+                axle_Spin.setPower(0);
+                auto_turn(-0.5, -45);
                 step++;
                 break;
             case 5:
-                auto_mecanum(0.5,35);
+                auto_drive(-0.5,25);
+                step++;
 
                 break;
+
+            case 6:
+                    auto_turn(0.5, 45);
+                    step++;
+                break;
+
+            case 7:
+                 auto_turn(0.5, -90);
+                 step++;
+                break;
+
+            case 8:
+                auto_drive(-0.5, 20);
+                step++;
+                break;
+
+
             default: break;
         }
      //   auto_mecanum(0.5,100);

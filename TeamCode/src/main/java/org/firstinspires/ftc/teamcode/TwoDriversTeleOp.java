@@ -43,6 +43,13 @@ public class TwoDriversTeleOp extends BaseRobot {
     @Override
     public void loop() {
 
+        if (gamepad2.a)
+            axle_Spin.setPower(1.0);
+        else if (gamepad2.b)
+            axle_Spin.setPower(-1.0);
+        else
+            axle_Spin.setPower(0);
+
         telemetry.addData("rotate1:", "pos=%d, power=%.2f, zero=%s, tar=%d", rotate1.getCurrentPosition(), rotate1.getPower(), rotate1.getZeroPowerBehavior(), rotate1.getTargetPosition());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
@@ -73,12 +80,7 @@ public class TwoDriversTeleOp extends BaseRobot {
 
 
 
-       if (gamepad2.a)
-            axle_Spin.setPower(1.0);
-       else if (gamepad2.b)
-            axle_Spin.setPower(-1.0);
-       else
-            axle_Spin.setPower(0);
+
 
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;

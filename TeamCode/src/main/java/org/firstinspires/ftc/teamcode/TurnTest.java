@@ -10,31 +10,40 @@ public class TurnTest extends BaseRobot {
     @Override
     public void init() {
         super.init();
+        telemetry.addData ("stage",stage);
         DEBUG = true;
     }
     @Override
     public void start() {
+
         super.start();
+
     }
     @Override
     public void loop() {
+        telemetry.addData ("stage",stage);
         switch (stage) {
             case 0: auto_turn(0.5, 45);
-              stage++;
-              break;
+                telemetry.addData ("stage",stage);
+                stage++;
+                break;
             case 1: auto_turn(-0.5, 45);
+                telemetry.addData ("stage",stage);
                 stage++;
                 break;
             case 2: auto_turn(0.5, 90);
+                telemetry.addData ("stage",stage);
                 stage++;
                 break;
             case 3: auto_turn(-0.5, 90);
+                telemetry.addData ("stage",stage);
                 stage++;
                 break;
 //            case 1: auto_drive(0.5, 1);
 //              break;
             default: break;
         }
+
         if (DEBUG) {
             telemetry.addData("Front curr pos:", "Left=%d, Right=%d", get_leftFront_motor_enc(), get_rightFront_motor_enc());
             telemetry.addData("Back  curr pos:", "Left=%d, Right=%d", get_leftBack_motor_enc(), get_rightBack_motor_enc());

@@ -11,6 +11,7 @@ public class AutoTest extends BaseRobot {
     public void init() {
         super.init();
         DEBUG = true;
+
     }
     @Override
     public void start() {
@@ -18,6 +19,13 @@ public class AutoTest extends BaseRobot {
     }
     @Override
     public void loop() {
+
+        auto_drive(0.5,5);
+        topSpin.setPower(0.5);
+       //auto_turn(0.5,15);
+     //   String debug = "here";
+      //  telemetry.addData("debug","=%s",debug);
+//        auto_drive(0.5,15);
 
      /*   switch (stage) {
             case 0: auto_turn(0.5, 45);

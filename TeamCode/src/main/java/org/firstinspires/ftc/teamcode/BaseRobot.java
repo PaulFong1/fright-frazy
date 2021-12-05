@@ -198,15 +198,16 @@ public class BaseRobot extends OpMode {
         if (power < 0.0) {  // Right pos is increasing
             // Move in opposite direction
             TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * dist_inch * 0.9 + 0.5); // inches to turns
-            if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %d", get_rightFront_motor_enc(), TARGET_ENC);
+        //    if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
             while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
-                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+                if (DEBUG) telemetry.addData("AUTO_DR:", "%d", get_rightFront_motor_enc());
             }
-        } else {        // Right pos is decreasing
+        }
+        else {        // Right pos is decreasing
             TARGET_ENC = -(int) (ConstantVariables.K_PPIN_DRIVE * dist_inch * 0.9 + 0.5); // inches to turns NEGATIVE
-            if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %d", get_rightFront_motor_enc(), TARGET_ENC);
+        //    if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
             while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
-                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+                if (DEBUG) telemetry.addData("AUTO_DR:", "%d", get_rightFront_motor_enc());
             }
         }
         leftFront.setPower(0);
@@ -236,21 +237,22 @@ public class BaseRobot extends OpMode {
         rightFront.setPower(-speed);         // Right is the same direction of Left which means turns in opposite direction
         rightBack.setPower(speed);         // Back is the opposite of Front
         // Right front motor is running in opposite direction
-        if (power < 0) {                    // Turning left -> right pos is decreasing
-            TARGET_ENC = -(int) (ConstantVariables.K_PPDEG_DRIVE * degrees * 1.2 + 0.5);  // degrees to turns NEGATIVE
-            while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
-                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
-            }
-        } else {                            // Turning right -> right pos is increasing
-            TARGET_ENC = (int) (ConstantVariables.K_PPDEG_DRIVE * degrees * 1.1 + 0.5);  // degrees to turns
-            while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
-                if (DEBUG) telemetry.addData("AUTO_TU:", "%d", get_rightFront_motor_enc());
+        if (power < 0.0) {                    // Turning left -> right pos is decreasing
+            TARGET_ENC = (int) (ConstantVariables.K_PPDEG_DRIVE * degrees*1.4 +0.5);  // degrees to turns NEGATIVE *1.2 +0.5
+            while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {//>    -
+                if (DEBUG) telemetry.addData("AUTO_TU POS:", "%d", get_rightFront_motor_enc());
             }
         }
-        leftFront.setPower(0.0);
-        leftBack.setPower(0.0);
-        rightFront.setPower(0.0);
-        rightBack.setPower(0.0);
+        else {                            // Turning right -> right pos is increasing
+            TARGET_ENC = -(int) (ConstantVariables.K_PPDEG_DRIVE * degrees*1.4 +0.5);  // degrees to turns *1.1 +0.5
+            while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {//<
+                if (DEBUG) telemetry.addData("AUTO_TU POS:", "%d", get_rightFront_motor_enc());
+            }
+        }
+        leftFront.setPower(0);
+        leftBack.setPower(0);
+        rightFront.setPower(0);
+        rightBack.setPower(0);
         return true;
     }
 //        if (get_rightFront_motor_enc() == (CURR_ENC + TARGET_ENC)) {  // get encoder = the difference
@@ -262,21 +264,26 @@ public class BaseRobot extends OpMode {
     // Positive for right, negative for left
     // Convert from inches to number of ticks per revolution
    public boolean auto_mecanum(double power, double inches) {
-  //1     rightFront.setDirection(DcMotor.Direction.REVERSE);
-  //1     leftFront.setDirection(DcMotor.Direction.REVERSE);
-        double TARGET_ENC = ConstantVariables.K_PPIN_DRIVE * inches;
+  //     rightFront.setDirection(DcMotor.Direction.REVERSE); these two will cause bot to turn
+  //    leftFront.setDirection(DcMotor.Direction.REVERSE);
+       // double TARGET_ENC = ConstantVariables.K_PPIN_DRIVE * inches;
+
+       int CURR_ENC = get_rightFront_motor_enc();
+       int TARGET_ENC;
+
    /*
         double leftFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double leftBackPower = Range.clip(0 + power, -1.0, 1.0);
         double rightFrontPower = Range.clip(0 - power, -1.0, 1.0);
         double rightBackPower = Range.clip(0 + power, -1.0, 1.0);
 */
-       double speed = Range.clip(power, -1, 1);
-        leftFront.setPower(-speed);
+       double speed = power;
+       speed = Range.clip(speed, -1, 1);
+        leftFront.setPower(speed);//-
         leftBack.setPower(speed);
-        rightFront.setPower(-speed);
+        rightFront.setPower(speed);//-
         rightBack.setPower(speed);
-        if (DEBUG) telemetry.addData("MEC - Target_enc: ", "%.2f", TARGET_ENC);
+     //   if (DEBUG) telemetry.addData("MEC - Target_enc: ", "%.2f", TARGET_ENC);
 
        /*
         telemetry.addData("lf","=%.2f",leftFrontPower);
@@ -284,15 +291,56 @@ public class BaseRobot extends OpMode {
        telemetry.addData("lb","=%.2f",leftFrontPower);
        telemetry.addData("rb","=%.2f",leftFrontPower);
        */
+
+       if (power < 0.0) {  // Right pos is increasing
+           // Move in opposite direction
+           TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * inches * 0.9 + 0.5); // inches to turns
+     //      if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
+
+           while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
+               if (DEBUG) telemetry.addData("AUTO_MEC:", "%d", get_rightFront_motor_enc());
+           }
+       }
+       else {        // Right pos is decreasing
+           TARGET_ENC = -(int) (ConstantVariables.K_PPIN_DRIVE * inches * 0.9 + 0.5); // inches to turns NEGATIVE
+       //    if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
+
+           while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
+               if (DEBUG) telemetry.addData("AUTO_MEC:", "%d", get_rightFront_motor_enc());
+           }
+       }
+
+
+       leftFront.setPower(0);
+       leftBack.setPower(0);
+       rightFront.setPower(0);
+       rightBack.setPower(0);
+       return true;
+
+
+/*
         if (Math.abs(get_rightFront_motor_enc()) >= TARGET_ENC) {
             leftFront.setPower(0);
             leftBack.setPower(0);
             rightFront.setPower(0);
             rightBack.setPower(0);
             return true;
-        } else {
+        }
+
+
+        else {
+            //try {
+              //  servo.setPower(power);
+
+                //  Thread.sleep(100);
+              //  wait(5000);
+            //} catch (InterruptedException e) {
+          //      e.printStackTrace();
+        //    }
             return false;
         }
+
+ */
     }
 
 

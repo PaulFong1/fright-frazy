@@ -25,39 +25,83 @@ public class BlueDuck extends BaseRobot {
     public void loop() {
         switch (step) {
             case 0:
-                auto_mecanum(-0.3, 10);
+                auto_drive(0.3, 15);
                 step++;
                 break;
             case 1:
-                try {
-                    topSpin.setPower(0.7);
-
-                    Thread.sleep(100);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-
+                //auto_mecanum(-0.5, 10);
+                //   updateTelemetry();
                 step++;
                 break;
             case 2:
-                topSpin.setPower(0);
-                auto_mecanum(-0.3, 50);
+                auto_turn(-0.3,75);
                 step++;
                 break;
             case 3:
-                auto_drive(-0.5, 5);
+                auto_drive(-0.3,35);
                 step++;
                 break;
+
             case 4:
-                auto_mecanum(-0.5, 25);
-                // step++;
+                // auto_spin(topSpin, 0.5,2);
+                // if (time<10)
+                topSpin.setPower(0.5);
+                auto_drive(-0.1, 5);
+                // while (time<3) {
+
+                //   telemetry.addData("power", "=%.2f", topSpin.getPower());
+                // }
+                //     else
+                //   topSpin.setPower(0);
+                //telemetry.addData("error","=%");
+
+                step++;
                 break;
+            case 5:
+                topSpin.setPower(0);
+                auto_drive(0.5, 5);
+
+                step++;
+                break;
+            case 6:
+                auto_turn(0.5,25);
+                //  auto_mecanum(-0.7, 15);
+                step++;
+                break;
+            case 7:
+                auto_drive(0.5,20);
+                step++;
+                break;
+            case 8:
+                axle_Spin.setPower(-0.7);
+                auto_drive(0.1,3);
+                //  auto_turn(0.3,10);
+                step++;
+                break;
+            case 9:
+                axle_Spin.setPower(0);
+                auto_drive(-0.3,7);
+                step++;
+                break;
+            case 10:
+                //   axle_Spin.setPower(-0.7);
+                //     auto_spin(axle_Spin,-0.7,2);
+                auto_turn(0.5,45);
+                step++;
+                break;
+            case 11:
+                //     axle_Spin.setPower(0);
+                auto_drive(-0.5,15);
+                //  step++;
+                break;
+            //case 12:
+            //  auto_mecanum(-0.5, 25);
+            // step++;
+            //   break;
 
             default: break;
         }
+
         /*
         if (time<1)
         {

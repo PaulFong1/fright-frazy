@@ -83,7 +83,7 @@ public class RedDuck extends BaseRobot {
                 step++;
                 break;
             case 3:
-                auto_drive(-0.3,25);
+                auto_drive(-0.3,35);
                 step++;
                 break;
 
@@ -91,6 +91,7 @@ public class RedDuck extends BaseRobot {
                // auto_spin(topSpin, 0.5,2);
                // if (time<10)
                 topSpin.setPower(0.5);
+                auto_drive(-0.1, 10);
                // while (time<3) {
 
                  //   telemetry.addData("power", "=%.2f", topSpin.getPower());
@@ -102,13 +103,13 @@ public class RedDuck extends BaseRobot {
                 step++;
                 break;
             case 5:
-             //   topSpin.setPower(0);
+                topSpin.setPower(0);
                 auto_drive(0.5, 5);
 
                 step++;
                 break;
            case 6:
-               auto_turn(-0.5,45);
+               auto_turn(0.5,25);
              //  auto_mecanum(-0.7, 15);
                 step++;
                 break;
@@ -117,21 +118,25 @@ public class RedDuck extends BaseRobot {
                 step++;
                 break;
             case 8:
-                auto_turn(0.3,10);
+                axle_Spin.setPower(-0.7);
+                auto_drive(0.1,7);
+              //  auto_turn(0.3,10);
                 step++;
                 break;
             case 9:
-                auto_drive(0.3,7);
+                axle_Spin.setPower(0);
+                auto_drive(-0.3,7);
                 step++;
                 break;
             case 10:
-                axle_Spin.setPower(-0.7);
+             //   axle_Spin.setPower(-0.7);
            //     auto_spin(axle_Spin,-0.7,2);
+                auto_turn(0.5,65);
                 step++;
                 break;
             case 11:
            //     axle_Spin.setPower(0);
-                auto_drive(-0.5,25);
+                auto_drive(-0.5,15);
              //  step++;
                 break;
             //case 12:

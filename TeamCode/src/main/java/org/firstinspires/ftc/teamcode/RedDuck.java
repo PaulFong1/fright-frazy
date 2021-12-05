@@ -70,38 +70,46 @@ public class RedDuck extends BaseRobot {
          */
         switch (step) {
             case 0:
-                auto_drive(0.3, 10);
+                auto_drive(0.3, 15);
                 step++;
                 break;
             case 1:
-                auto_mecanum(0.5, 10);
+                //auto_mecanum(-0.5, 10);
              //   updateTelemetry();
                 step++;
                 break;
             case 2:
-                auto_turn(0.3,20);
+                auto_turn(-0.3,90);
                 step++;
                 break;
             case 3:
-                auto_drive(-0.3,15);
+                auto_drive(-0.3,25);
                 step++;
                 break;
 
             case 4:
-                auto_spin(topSpin, 0.5,3000);
+               // auto_spin(topSpin, 0.5,2);
+               // if (time<10)
+                topSpin.setPower(0.5);
+               // while (time<3) {
 
+                 //   telemetry.addData("power", "=%.2f", topSpin.getPower());
+               // }
+           //     else
+             //   topSpin.setPower(0);
             //telemetry.addData("error","=%");
 
                 step++;
                 break;
             case 5:
-                topSpin.setPower(0);
+             //   topSpin.setPower(0);
                 auto_drive(0.5, 5);
 
                 step++;
                 break;
            case 6:
-               auto_mecanum(-0.3, 15);
+               auto_turn(-0.5,45);
+             //  auto_mecanum(-0.7, 15);
                 step++;
                 break;
             case 7:
@@ -117,12 +125,12 @@ public class RedDuck extends BaseRobot {
                 step++;
                 break;
             case 10:
-                auto_spin(axle_Spin,-0.7,2000);
-
+                axle_Spin.setPower(-0.7);
+           //     auto_spin(axle_Spin,-0.7,2);
                 step++;
                 break;
             case 11:
-                axle_Spin.setPower(0);
+           //     axle_Spin.setPower(0);
                 auto_drive(-0.5,25);
              //  step++;
                 break;

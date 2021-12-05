@@ -34,7 +34,8 @@ public class RedPark extends BaseRobot{
                 step++;
                 break;
             case 3:
-                auto_spin(axle_Spin,-1.0,2000);
+                axle_Spin.setPower(-0.7);
+            //    auto_spin(axle_Spin,-1.0,2);
                 step++;
                 break;
             case 4:

@@ -19,9 +19,15 @@ public class AutoTest extends BaseRobot {
     }
     @Override
     public void loop() {
-
-        auto_mecanum(0.5,5);
-        topSpin.setPower(0.5);
+    auto_mecanum(0.7,20);
+   //     auto_drive(0.7,50);
+     //   if (time<10)
+      //      axle_Spin.setPower(-0.7);
+       // else
+       // axle_Spin.setPower(0);
+    // auto_spin(axle_Spin,0.7,3);
+    //    auto_mecanum(0.7,50);
+      //  topSpin.setPower(0.5);
        //auto_turn(0.5,15);
      //   String debug = "here";
       //  telemetry.addData("debug","=%s",debug);

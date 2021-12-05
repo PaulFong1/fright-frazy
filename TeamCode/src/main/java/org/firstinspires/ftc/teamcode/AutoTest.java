@@ -20,7 +20,7 @@ public class AutoTest extends BaseRobot {
     @Override
     public void loop() {
 
-        auto_drive(0.5,5);
+        auto_mecanum(0.5,5);
         topSpin.setPower(0.5);
        //auto_turn(0.5,15);
      //   String debug = "here";

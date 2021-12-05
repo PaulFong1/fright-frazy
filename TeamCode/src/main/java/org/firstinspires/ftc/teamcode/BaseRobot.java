@@ -297,15 +297,18 @@ public class BaseRobot extends OpMode {
            TARGET_ENC = (int) (ConstantVariables.K_PPIN_DRIVE * inches * 0.9 + 0.5); // inches to turns
      //      if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
 
-           while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
+           while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {//wheel turns in (neg)
+               //<
                if (DEBUG) telemetry.addData("AUTO_MEC:", "%d", get_rightFront_motor_enc());
            }
        }
        else {        // Right pos is decreasing
+
            TARGET_ENC = -(int) (ConstantVariables.K_PPIN_DRIVE * inches * 0.9 + 0.5); // inches to turns NEGATIVE
        //    if (DEBUG) telemetry.addData("Auto_D: ", "Now %d/Tar %.2f", get_rightFront_motor_enc(), TARGET_ENC);
-
-           while (get_rightFront_motor_enc() > (CURR_ENC + TARGET_ENC)) {
+            //wheel turns out (pos)
+           while (get_rightFront_motor_enc() < (CURR_ENC + TARGET_ENC)) {
+               //>
                if (DEBUG) telemetry.addData("AUTO_MEC:", "%d", get_rightFront_motor_enc());
            }
        }
@@ -424,8 +427,11 @@ public class BaseRobot extends OpMode {
         motor.setPower(0);
         return;
     }
-    public void auto_spin(CRServo servo, double power, int time) {
-        try {
+    public void auto_spin(CRServo servo, double power, int spinTime) {
+        while (time<spinTime+3)
+            servo.setPower(power);
+        /*
+            try {
             servo.setPower(power);
 
             //  Thread.sleep(100);
@@ -433,6 +439,8 @@ public class BaseRobot extends OpMode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     // alpha is light intensity

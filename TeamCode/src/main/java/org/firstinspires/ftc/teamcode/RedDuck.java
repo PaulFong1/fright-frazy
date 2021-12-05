@@ -124,7 +124,7 @@ public class RedDuck extends BaseRobot {
             case 11:
                 axle_Spin.setPower(0);
                 auto_drive(-0.5,25);
-                step++;
+             //  step++;
                 break;
             //case 12:
               //  auto_mecanum(-0.5, 25);

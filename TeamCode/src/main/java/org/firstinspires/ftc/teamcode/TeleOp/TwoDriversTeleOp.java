@@ -14,7 +14,7 @@ public class TwoDriversTeleOp extends BaseRobot {
     private int secondLevel = 200;
     private int thirdLevel = 800;
     private int rot1holdpos = 0;   // The target position for the rotate
-                                   // rotate1 may oscillate around this value
+                                   // actuator may oscillate around this value
                                    // Encoder values are not very accurate
   //  private boolean turned = false;
 
@@ -29,11 +29,11 @@ public class TwoDriversTeleOp extends BaseRobot {
         super.start();
        // axle_spin.resetDeviceConfigurationForOpMode();
 
-        rotate1.setTargetPosition(100);
-        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rotate1.setPower(0);
-        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        actuator.setTargetPosition(100);
+        actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        actuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        actuator.setPower(0);
+        actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
@@ -53,7 +53,7 @@ public class TwoDriversTeleOp extends BaseRobot {
         else
             axle_Spin.setPower(0);
 
-        telemetry.addData("rotate1:", "pos=%d, power=%.2f, zero=%s, tar=%d", rotate1.getCurrentPosition(), rotate1.getPower(), rotate1.getZeroPowerBehavior(), rotate1.getTargetPosition());
+        telemetry.addData("actuator:", "pos=%d, power=%.2f, zero=%s, tar=%d", actuator.getCurrentPosition(), actuator.getPower(), actuator.getZeroPowerBehavior(), actuator.getTargetPosition());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
@@ -62,10 +62,10 @@ public class TwoDriversTeleOp extends BaseRobot {
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         //tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_original(-0.7*gamepad1.right_stick_y, -0.7*gamepad1.left_stick_y, -0.7*gamepad1.right_stick_x);
-      //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
-        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        tankanum_original(-0.7 * gamepad1.right_stick_y, -0.7 * gamepad1.left_stick_y, -0.7 * gamepad1.right_stick_x);
+        //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
+        actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Mini movements
         //    if ((gamepad1.right_stick_y == 0) && (gamepad1.left_stick_y == 0) && (gamepad1.right_stick_x == 0)) {
         //          if (gamepad1.dpad_up) auto_drive(0.75, 0.5);
@@ -77,13 +77,8 @@ public class TwoDriversTeleOp extends BaseRobot {
         if (gamepad2.left_bumper)
             box_Spin.setPosition(0.4);
 
-       if (gamepad2.right_bumper)
+        if (gamepad2.right_bumper)
             box_Spin.setPosition(0.1);
-
-
-
-
-
 
 
         if (get_linearSlide_motor_enc() < secondLevel - 100) stage = 0;
@@ -94,17 +89,17 @@ public class TwoDriversTeleOp extends BaseRobot {
 //        telemetry.addData("stage: ", "=%d",stage);
         telemetry.update();
 
-       // if (gamepad2.x && stage < 2) {
-         //   linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
-           // stage++;
+        // if (gamepad2.x && stage < 2) {
+        //   linearSlideSetPosition(linearSlide, stage == 0 ? secondLevel : thirdLevel);
+        // stage++;
         //}
 
         //else if (gamepad2.y && stage > 0) {
-          //  linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
-           // stage--;
+        //  linearSlideSetPosition(linearSlide, stage == 2 ? secondLevel : firstLevel);
+        // stage--;
         //}
 
-         if (gamepad2.dpad_right) {
+        if (gamepad2.dpad_right) {
             linearSlide.setPower(0.85);
             if (linearSlide.getCurrentPosition() >= secondLevel) {
                 stage = 1;
@@ -112,9 +107,7 @@ public class TwoDriversTeleOp extends BaseRobot {
             if (linearSlide.getCurrentPosition() >= thirdLevel) {
                 stage = 2;
             }
-        }
-
-        else if (gamepad2.dpad_left) {
+        } else if (gamepad2.dpad_left) {
             linearSlide.setPower(-0.4);
             if (linearSlide.getCurrentPosition() <= secondLevel) {
                 stage = 1;
@@ -131,18 +124,27 @@ public class TwoDriversTeleOp extends BaseRobot {
 //        if (gamepad1.a) linearSlide.setPower(1.0); //extend
 //        else if (gamepad1.b) linearSlide.setPower(-1.0); //retract
 //
-//        else if (gamepad1.x) {
-//            if (stage < 2 && get_linearSlide_motor_enc() < 510) {
-//                stage++;
-//                linearSlideSetPosition(linearSlide, stage, 0.3);
-//            }
-//        } else if (gamepad1.y) {
-//            if (stage > 0 && get_linearSlide_motor_enc() > 490) {
-//                stage--;
-//                linearSlideSetPosition(linearSlide, stage, 0.3);
-//            }
+//       =
+
 //
 //        } else linearSlide.setPower(0);
+
+        if (gamepad1.x)
+        {
+            // sets actuator to zero, sets linear slide position to 0
+                actuator.setTargetPosition(0);
+                linearSlideSetPosition(linearSlide, 0);
+
+        } else if (gamepad1.y)
+          {
+
+              // sets actuator to 3rd tier position, sets linear slide to 3rd stage
+              actuator.setTargetPosition(100);
+              linearSlideSetPosition(linearSlide, 900);
+
+
+
+          }
 
         if (gamepad1.left_bumper)
             topSpin.setPower(0.5);
@@ -154,42 +156,42 @@ public class TwoDriversTeleOp extends BaseRobot {
 
         if (gamepad2.dpad_up) {
 // Don't know if RUN_TO_POSITION is better than BRAKE
-//            rotate1.setPower(-1);
-//            rot1holdpos = rotate1.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
+//            actuator.setPower(-1);
+//            rot1holdpos = actuator.getCurrentPosition() - 1;  // Each press move the rotate up 10 pos
             rot1holdpos -= 250;  // Each press move the rotate up 10 pos
-            rotate1.setTargetPosition(rot1holdpos);
-            rotate1.setPower(-1.0);                           // maximum power to move up and hold
-            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            while (rotate1.isBusy()) { }        // May cause loop problem
+            actuator.setTargetPosition(rot1holdpos);
+            actuator.setPower(-1.0);                           // maximum power to move up and hold
+            actuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            while (actuator.isBusy()) { }        // May cause loop problem
             //rotate2.setPower(0.1);
 
-       //     rotate1.setPower(-1.0);
+       //     actuator.setPower(-1.0);
         }
          else if (gamepad2.dpad_down) {
-//            rotate1.setPower(0.3);
-//            rot1holdpos = rotate1.getCurrentPosition() + 1;
+//            actuator.setPower(0.3);
+//            rot1holdpos = actuator.getCurrentPosition() + 1;
             rot1holdpos += 25;
-            rotate1.setTargetPosition(rot1holdpos);
-            rotate1.setPower(0.7);
-            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            while (rotate1.isBusy()) { }
+            actuator.setTargetPosition(rot1holdpos);
+            actuator.setPower(0.7);
+            actuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            while (actuator.isBusy()) { }
             // rotate2.setPower(0.5);
-//rotate1.setPower(1.0);
-            // else if (get_rotate1_motor_enc()>=200)
-            //     rotate1.setPower(-0.4);
-            // else if (get_rotate1_motor_enc()>=100)
-            //      rotate1.setPower(-0.3);
+//actuator.setPower(1.0);
+            // else if (get_actuator_motor_enc()>=200)
+            //     actuator.setPower(-0.4);
+            // else if (get_actuator_motor_enc()>=100)
+            //      actuator.setPower(-0.3);
         }
 
         else {
-            rotate1.setTargetPosition(rot1holdpos);        // Try to stabilize
-           rotate1.setPower(-1.0);                        // Need maximize the hold the position
-            rotate1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //    rotate1.setPower(0);
-            rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            while (rotate1.isBusy()) { }
-        //    rotate1.setPower(0.0);
-            //     rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            actuator.setTargetPosition(rot1holdpos);        // Try to stabilize
+           actuator.setPower(-1.0);                        // Need maximize the hold the position
+            actuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //    actuator.setPower(0);
+            actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            while (actuator.isBusy()) { }
+        //    actuator.setPower(0.0);
+            //     actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
          //  rotate2.setPower(0.0);

@@ -33,11 +33,11 @@ public class RedDuck extends BaseRobot {
         if (time<2.25) {
             tank_drive(0.3,0.3);
       //      auto_drive(-0.3, 5);
-         //   rotate1.setPower(-0.3);
+         //   actuator.setPower(-0.3);
         }
         else if (time<5.2 && time>3.0) {
             topSpin.setPower(-0.5);
-          //  rotate1.setPower(-0.5);
+          //  actuator.setPower(-0.5);
         }
 
         else if (time>5.3 && time <6.4)
@@ -52,7 +52,7 @@ public class RedDuck extends BaseRobot {
         }
 
       // else if (time<8.4 && time > 7.4){}
-//            rotate1.setPower(-0.8);
+//            actuator.setPower(-0.8);
 
         else if (time<13 && time > 9.5) {
 
@@ -166,7 +166,7 @@ public class RedDuck extends BaseRobot {
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
             telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
             //telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+            telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
         }
     }
 }

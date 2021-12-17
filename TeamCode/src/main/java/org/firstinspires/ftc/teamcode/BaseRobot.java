@@ -17,10 +17,10 @@ import com.qualcomm.robotcore.hardware.CRServo;
 //created for 16887
 //2021-2022 FTC Season
 public class BaseRobot extends OpMode {
-    public DcMotor leftBack, rightBack, leftFront, rightFront, linearSlide, rotate1; //rotate2;   // The four wheels
+    public DcMotor leftBack, rightBack, leftFront, rightFront, linearSlide, actuator, axle_Spin; //rotate2;   // The four wheels
 // public Servo top_spin;                                       // The top spinning wheel
       public Servo box_Spin;
-      public CRServo axle_Spin, topSpin; //box_Spin;
+      public CRServo topSpin; //box_Spin;
 //    public ColorSensor front_sensor;
 //    public DistanceSensor distance_sensor;
     public ElapsedTime timer = new ElapsedTime();
@@ -38,14 +38,15 @@ public class BaseRobot extends OpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-        topSpin = hardwareMap.get(CRServo.class, "topSpin");
+        axle_Spin = hardwareMap.get(DcMotor.class, "axle_Spin");
         linearSlide = hardwareMap.get(DcMotor.class, "linearSlide");
-        rotate1 = hardwareMap.get(DcMotor.class, "rotate1");
+        actuator = hardwareMap.get(DcMotor.class, "actuator");
        // rotate2 = hardwareMap.get(DcMotor.class, "rotate2");
 
         //box_Spin = hardwareMap.get(CRServo.class, "box_Spin");
        box_Spin = hardwareMap.get(Servo.class, "box_Spin");
-        axle_Spin = hardwareMap.get(CRServo.class, "axle_Spin");
+        topSpin = hardwareMap.get(CRServo.class, "topSpin");
+
         //intake  = hardwareMap.get(DcMotor.class, "intake");
 
 //        front_sensor = hardwareMap.get(ColorSensor.class, "front_sensor");
@@ -59,14 +60,14 @@ public class BaseRobot extends OpMode {
 
         telemetry.addData("INI linearSlide: ", "ZeroP=%s, POS=%d", linearSlide.getZeroPowerBehavior(), linearSlide.getCurrentPosition());
 
-        telemetry.addData("INI rotate1: ", "ZeroP=%s, POS=%d", rotate1.getZeroPowerBehavior(), rotate1.getCurrentPosition());
+        telemetry.addData("INI actuator: ", "ZeroP=%s, POS=%d", actuator.getZeroPowerBehavior(), actuator.getCurrentPosition());
      //   telemetry.addData("INI rotate2: ", "ZeroP=%s, POS=%d", rotate2.getZeroPowerBehavior(), rotate2.getCurrentPosition());
         //telemetry.addData("INI rotate2: ", "ZeroP=%s, POS=%d", intake.getZeroPowerBehavior(), intake.getCurrentPosition());
 //        telemetry.addData("INI SPIN ZeroP behavior: ", "spin1=%s, spin2=%s", spin1.getZeroPowerBehavior(), spin2.getZeroPowerBehavior());
 //        telemetry.addData("INI Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("INI Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
 
-        telemetry.addData("INI Servo dir: ", "Axle=%s, Box=%s", axle_Spin.getDirection(), box_Spin.getDirection());
+        telemetry.addData("INI Servo dir: ",  "Box=%s", box_Spin.getDirection());
     //    telemetry.addData("Box Power", "=%.2f", box_Spin.getPower());
 
         // BRAKE: The motor stops and then brakes, actively resisting any external force which attempts to turn the motor.
@@ -80,7 +81,7 @@ public class BaseRobot extends OpMode {
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       //  rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -113,13 +114,13 @@ public class BaseRobot extends OpMode {
         telemetry.addData("START linearSlide ZeroP behavior: ", "linearSlide=%s", linearSlide.getZeroPowerBehavior());
         //telemetry.addData("START topSpin ZeroP behavior: ", "topSpin=%s", topSpin.getZeroPowerBehavior());
 
-        telemetry.addData("START rotate ZeroP behavior: ", "rotate1=%s", rotate1.getZeroPowerBehavior());
+        telemetry.addData("START rotate ZeroP behavior: ", "actuator=%s", actuator.getZeroPowerBehavior());
      //   telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", rotate2.getZeroPowerBehavior());
         //telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", intake.getZeroPowerBehavior());
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", axle_Spin.getDirection(), box_Spin.getDirection());
+        telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", box_Spin.getDirection());
 
     }
 
@@ -136,7 +137,7 @@ public class BaseRobot extends OpMode {
         telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
         telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
         //telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-        telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+        telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
      //   telemetry.addData("rotate2:", "pos=%d, power=%.2f", get_rotate2_motor_enc(), rotate2.getPower());
     }
 
@@ -154,7 +155,7 @@ public class BaseRobot extends OpMode {
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
             telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
             //telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+            telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
      //       telemetry.addData("rotate2:", "pos=%d, power=%.2f", get_rotate2_motor_enc(), rotate2.getPower());
 
             // telemetry.addData("intake pos:", "rotate2 =%d", get_intake_motor_enc());
@@ -505,12 +506,12 @@ public class BaseRobot extends OpMode {
     }*/
     public void reset_rotate_encoders() {
         // The motor is to set the current encoder position to zero.
-        rotate1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        actuator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
    //     rotate2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // The motor is simply to run at whatever velocity is achieved by apply a particular power level to the motor.
-        rotate1.setPower(0.0);
+        actuator.setPower(0.0);
      //   rotate2.setPower(0.0);
-        rotate1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        actuator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
        // rotate2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
@@ -561,8 +562,8 @@ public class BaseRobot extends OpMode {
         //return topSpin.getCurrentPosition();
     //}
 
-    public int get_rotate1_motor_enc() {
-        return rotate1.getCurrentPosition();
+    public int get_actuator_motor_enc() {
+        return actuator.getCurrentPosition();
     }
     //public int get_rotate2_motor_enc() {
       //  return rotate2.getCurrentPosition();

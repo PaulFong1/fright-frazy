@@ -79,7 +79,7 @@ public class RedPark extends BaseRobot {
         if (time<1.5) {
             tank_drive(-0.5,-0.5);
             //      auto_drive(-0.3, 5);
-            //   rotate1.setPower(-0.3);
+            //   actuator.setPower(-0.3);
         }
         else if (time>1.5 && time<2.5)
         {
@@ -91,7 +91,7 @@ public class RedPark extends BaseRobot {
         //  auto_turn(-0.5,7);
         //else if (time>5.1 && time <5.5) {
         //   topSpin.setPower(-0.5);
-        //  rotate1.setPower(-0.5);
+        //  actuator.setPower(-0.5);
         // }
 
         //else if (time<6.2 && time > 5.5)
@@ -135,7 +135,7 @@ public class RedPark extends BaseRobot {
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
             telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
            // telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+            telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
         }
     }
 }

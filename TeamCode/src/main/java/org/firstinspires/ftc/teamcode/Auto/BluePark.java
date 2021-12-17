@@ -73,7 +73,7 @@ public class BluePark extends BaseRobot {
         if (time<1.4) {
           //  tank_drive(-0.4,-0.4);
             //      auto_drive(-0.3, 5);
-            //   rotate1.setPower(-0.3);
+            //   actuator.setPower(-0.3);
         }
         else if (time>1.6 && time<2.9)
         {
@@ -85,7 +85,7 @@ public class BluePark extends BaseRobot {
           //  auto_turn(-0.5,7);
         //else if (time>5.1 && time <5.5) {
          //   topSpin.setPower(-0.5);
-            //  rotate1.setPower(-0.5);
+            //  actuator.setPower(-0.5);
        // }
 
         //else if (time<6.2 && time > 5.5)
@@ -128,7 +128,7 @@ public class BluePark extends BaseRobot {
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
             telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
            // telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+            telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
         }
     }
 }

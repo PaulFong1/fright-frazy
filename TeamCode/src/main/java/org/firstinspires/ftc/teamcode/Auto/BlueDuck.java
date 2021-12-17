@@ -124,7 +124,7 @@ public class BlueDuck extends BaseRobot {
         else if (time>1&&time<2) {
             tank_drive(0.4,0.4);
             //      auto_drive(-0.3, 5);
-         //   rotate1.setPower(-0.3);
+         //   actuator.setPower(-0.3);
         }
         else if (time<4.0 && time>2.5)
             auto_turn(0.5,45);
@@ -132,7 +132,7 @@ public class BlueDuck extends BaseRobot {
 
             tank_drive(0.3,0.3);
 
-          //  rotate1.setPower(-0.5);
+          //  actuator.setPower(-0.5);
         }
         else if (time>5.7 && time <7.5)
         {
@@ -154,7 +154,7 @@ public class BlueDuck extends BaseRobot {
 
          */
        // else if (time<8 && time > 7)
-         //   rotate1.setPower(-0.8);
+         //   actuator.setPower(-0.8);
 /*
         else if (time<12 && time > 10) {
 
@@ -192,7 +192,7 @@ public class BlueDuck extends BaseRobot {
             telemetry.addData("Back  power: ", "Left=%.2f, Right=%.2f", leftBack.getPower(), rightBack.getPower());
             telemetry.addData("linearSlide:", "pos=%d, power=%.2f", get_linearSlide_motor_enc(), linearSlide.getPower());
             //telemetry.addData("topSpin:", "pos=%d, power=%.2f", get_topSpin_motor_enc(), topSpin.getPower());
-            telemetry.addData("rotate1:", "pos=%d, power=%.2f", get_rotate1_motor_enc(), rotate1.getPower());
+            telemetry.addData("actuator:", "pos=%d, power=%.2f", get_actuator_motor_enc(), actuator.getPower());
         }
     }
 }

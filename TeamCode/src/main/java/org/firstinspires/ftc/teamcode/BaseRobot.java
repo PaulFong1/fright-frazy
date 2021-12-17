@@ -423,7 +423,8 @@ public class BaseRobot extends OpMode {
 //        motor.setTargetPosition(targetPosition);
 //        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor.setPower(power);
-        while (motor.isBusy()) {   // Need improvement, motor may be stuck
+        while (motor.isBusy()) {
+            // Need improvement, motor may be stuck
         }
         motor.setPower(0);
         return;

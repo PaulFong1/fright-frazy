@@ -1,5 +1,7 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import org.firstinspires.ftc.teamcode.BaseRobot;
 
 // Created  for 16887.
 @Autonomous(name="auto Test", group="Simple")
@@ -19,8 +21,8 @@ public class AutoTest extends BaseRobot {
     }
     @Override
     public void loop() {
-   axle_Spin.setPower(0.7);
-        // auto_mecanum(0.7,20);
+  // axle_Spin.setPower(0.7);
+         auto_mecanum(0.7,5);
    //     auto_drive(0.7,50);
      //   if (time<10)
       //      axle_Spin.setPower(-0.7);

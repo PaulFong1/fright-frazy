@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.BaseRobot;
 
 // Created for 16887.
 @TeleOp(name = "TwoDriversTeleOp", group = "TeleOp")
@@ -42,6 +44,7 @@ public class TwoDriversTeleOp extends BaseRobot {
 
     @Override
     public void loop() {
+        super.loop();
 
         if (gamepad2.a)
             axle_Spin.setPower(1.0);
@@ -59,7 +62,7 @@ public class TwoDriversTeleOp extends BaseRobot {
         // tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         //tankanum_drive(gamepad1.right_stick_y, gamepad1.left_stick_y, gamepad1.right_stick_x);
-        tankanum_original(-0.6*gamepad1.right_stick_y, -0.6*gamepad1.left_stick_y, -0.6*gamepad1.right_stick_x);
+        tankanum_original(-0.7*gamepad1.right_stick_y, -0.7*gamepad1.left_stick_y, -0.7*gamepad1.right_stick_x);
       //  tank_drive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         rotate1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     //    rotate2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -199,7 +202,6 @@ public class TwoDriversTeleOp extends BaseRobot {
 
 
             if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
-        super.loop();
 
 
 

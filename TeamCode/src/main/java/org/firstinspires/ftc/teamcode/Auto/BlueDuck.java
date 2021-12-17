@@ -1,6 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.BaseRobot;
 
 // Created  for 16887.
 @Autonomous(name="BlueDuck", group="Simple")
@@ -25,28 +27,40 @@ public class BlueDuck extends BaseRobot {
     public void loop() {
         switch (step) {
             case 0:
-                auto_drive(0.3, 15);
+                auto_drive(0.3, 30);//increase?
                 step++;
                 break;
             case 1:
-                //auto_mecanum(-0.5, 10);
-                //   updateTelemetry();
+                //auto_turn(0.5,45);
+
                 step++;
                 break;
+                /*
+                case 2:
+                 axle_spin.setPower(-0.7);
+                 step++;
+                 break;
+                 case 3:
+                   auto_turn(-0.5,45);
+                   step++;
+                   break;
+                 */
+
+
             case 2:
-                auto_turn(-0.3,75);
+                auto_turn(0.3,45);
                 step++;
                 break;
             case 3:
-                auto_drive(-0.3,35);
+                auto_drive(-0.4,37);//increase?
                 step++;
                 break;
 
             case 4:
                 // auto_spin(topSpin, 0.5,2);
                 // if (time<10)
-                topSpin.setPower(0.5);
-                auto_drive(-0.1, 5);
+                topSpin.setPower(0.2);
+                auto_drive(-0.01, 3.5);
                 // while (time<3) {
 
                 //   telemetry.addData("power", "=%.2f", topSpin.getPower());
@@ -58,7 +72,7 @@ public class BlueDuck extends BaseRobot {
                 step++;
                 break;
             case 5:
-                topSpin.setPower(0);
+        //        topSpin.setPower(0);
                 auto_drive(0.5, 5);
 
                 step++;

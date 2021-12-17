@@ -1,10 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.teamcode.BaseRobot;
+
 // Created  for 16887.
 @Autonomous(name="RedDuckBlock", group="Simple")
 //@Disabled
@@ -70,7 +73,7 @@ public class RedDuck extends BaseRobot {
          */
         switch (step) {
             case 0:
-                auto_drive(0.3, 15);
+                auto_drive(0.3, 30);
                 step++;
                 break;
             case 1:
@@ -91,13 +94,13 @@ public class RedDuck extends BaseRobot {
                // auto_spin(topSpin, 0.5,2);
                // if (time<10)
                 topSpin.setPower(-0.7);
-                auto_drive(-0.1, 7);
+                auto_drive(-0.1, 3.5);
 
 
                 step++;
                 break;
              case 5:
-                topSpin.setPower(0);
+        //        topSpin.setPower(0);
                 auto_drive(0.5, 5);
 
                 step++;

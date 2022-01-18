@@ -46,9 +46,9 @@ public class TwoDriversTeleOp extends BaseRobot {
     public void loop() {
         super.loop();
 
-        if (gamepad2.a)
+        if (gamepad2.b)
             axle_Spin.setPower(1.0);
-        else if (gamepad2.b)
+        else if (gamepad2.a)
             axle_Spin.setPower(-1.0);
         else
             axle_Spin.setPower(0);

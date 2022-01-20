@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -28,12 +28,14 @@ public class TestTeleOp extends BaseRobot {
     public void start() {
         super.start();
         // axle_spin.resetDeviceConfigurationForOpMode();
-
+/*
         actuator.setTargetPosition(100);
         actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         actuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         actuator.setPower(0);
         actuator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+ */
 
 
 
@@ -45,7 +47,7 @@ public class TestTeleOp extends BaseRobot {
     @Override
     public void loop() {
 
-        telemetry.addData("actuator:", "pos=%d, power=%.2f, zero=%s, tar=%d", actuator.getCurrentPosition(), actuator.getPower(), actuator.getZeroPowerBehavior(), actuator.getTargetPosition());
+     //  telemetry.addData("actuator:", "pos=%d, power=%.2f, zero=%s, tar=%d", actuator.getCurrentPosition(), actuator.getPower(), actuator.getZeroPowerBehavior(), actuator.getTargetPosition());
         //     reset_drive_encoders();
         //    reset_linearSlide_encoders();
         //    reset_rotate_encoders();
@@ -67,7 +69,7 @@ public class TestTeleOp extends BaseRobot {
         else {
             topSpin.setPower(0);
         }*/
-
+/*
         if (gamepad2.left_trigger > 0.2)
             topSpin.setPower(gamepad1.left_trigger);
 
@@ -208,6 +210,8 @@ public class TestTeleOp extends BaseRobot {
         }
 
 
+
+ */
         if (gamepad1.left_stick_button) DEBUG = !DEBUG; // Toggle the debug flag
         super.loop();
 

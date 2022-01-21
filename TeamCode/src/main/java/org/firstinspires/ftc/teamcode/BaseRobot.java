@@ -117,13 +117,13 @@ public class BaseRobot extends OpMode {
         telemetry.addData("START linearSlide ZeroP behavior: ", "linearSlide=%s", linearSlide.getZeroPowerBehavior());
         //telemetry.addData("START topSpin ZeroP behavior: ", "topSpin=%s", topSpin.getZeroPowerBehavior());
 
-        telemetry.addData("START rotate ZeroP behavior: ", "actuator=%s", actuator.getZeroPowerBehavior());
+   //     telemetry.addData("START rotate ZeroP behavior: ", "actuator=%s", actuator.getZeroPowerBehavior());
      //   telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", rotate2.getZeroPowerBehavior());
         //telemetry.addData("START rotate ZeroP behavior: ", "rotate2=%s", intake.getZeroPowerBehavior());
 //        telemetry.addData("START LIFT1 position", lift1.getCurrentPosition());
 //        telemetry.addData("START Sen: ", "%d/ %d/ %d/ %d/ %d", front_sensor.alpha(), front_sensor.red(), front_sensor.green(), front_sensor.blue(), front_sensor.argb());
 //        telemetry.addData("START Distance (cm)", distance_sensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", box_Spin.getDirection());
+  //      telemetry.addData("START Servo dir: ", "Dir=%s, RIGHT=%s", box_Spin.getDirection());
 
     }
 
@@ -393,7 +393,7 @@ public class BaseRobot extends OpMode {
         leftBack.setPower(leftBackPower);
         rightFront.setPower(rightFrontPower);
         rightBack.setPower(rightBackPower);
-        if (DEBUG) telemetry.addData("TANK- Lateral: ", "=%.2f",lateralpwr);
+       // if (DEBUG) telemetry.addData("TANK- Lateral: ", "=%.2f",lateralpwr);
     }
 
     public void tank_drive(double leftPwr, double rightPwr) {
